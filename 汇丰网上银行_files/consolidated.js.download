@@ -1,0 +1,1739 @@
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+
+ 
+ 
+ 
+ 
+
+
+
+
+var jsvFontSize = 100;
+var jsvFMax = 120;
+var jsvFMin = 100;
+var jsvIsIE501 = navigator.userAgent.indexOf("MSIE 5.01") > 0 ? true : false;
+var jsvIsNN6 = navigator.userAgent.indexOf("Netscape6") > 0 ? true : false;
+var jsvIsIE=document.all&&navigator.userAgent.indexOf("Opera")==-1;
+var jsvContractIconUrl = "../images/contact_close.gif";
+var jsvExpandIconUrl = "../images/contact_open.gif";
+var jsvRotationStop = false;
+var jsvTimeoutId;
+
+var jsvDropdownOuputArray = new Array();
+
+
+
+
+
+
+function setFontSize()
+{
+	var tempSize = getCookie("fontSize");
+	if((tempSize != null) && (tempSize >= 100) && (tempSize <= 120))
+	{
+		jsvFontSize = tempSize;
+	}
+	else
+	{
+		setCookie("fontSize", 100, "", "/");
+	}
+	document.body.style.fontSize = jsvFontSize + "%";
+}
+
+
+
+
+
+function changeFontSize(increment)
+{
+	if(increment)
+	{
+		jsvFontSize=parseInt(jsvFontSize) + parseInt(10);
+	}
+	else
+	{
+		jsvFontSize=parseInt(jsvFontSize) - parseInt(10);
+	}
+
+	if(jsvFontSize > jsvFMax)
+	{
+		jsvFontSize = jsvFMax;
+	}
+	if(jsvFontSize < jsvFMin)
+	{
+		jsvFontSize = jsvFMin;
+	}
+	switch(jsvFontSize)
+	{
+		case 100:
+			document.body.style.fontSize = "1em";
+			break;
+		case 110:
+			document.body.style.fontSize = "1.10em";
+			break;
+		case 120:
+			document.body.style.fontSize = "1.20em";
+			break;
+	}
+	setCookie('fontSize', jsvFontSize, "", "/");
+}
+
+
+
+function incrementFontSize()
+{
+	changeFontSize(true);
+}
+
+
+
+function decrementFontSize()
+{
+	changeFontSize(false);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+function setCookie(name, value, expires, path, domain, secure)
+{
+    document.cookie= name + "=" + escape(value) +
+        ((expires) ? "; expires=" + expires.toGMTString() : "") +
+        ((path) ? "; path=" + path : "") +
+        ((domain) ? "; domain=" + domain : "") +
+        ((secure) ? "; secure" : "");
+}
+
+
+
+
+
+
+
+
+
+function getCookie(name)
+{
+    var dc = document.cookie;
+    var prefix = name + "=";
+    var begin = dc.indexOf("; " + prefix);
+    if (begin == -1)
+    {
+        begin = dc.indexOf(prefix);
+        if (begin != 0) return null;
+    }
+    else
+    {
+        begin += 2;
+    }
+    var end = document.cookie.indexOf(";", begin);
+    if (end == -1)
+    {
+        end = dc.length;
+    }
+    return unescape(dc.substring(begin + prefix.length, end));
+}
+
+function jsfToggleMenu(self)
+{
+	var n = self;
+	var childImg = n.childNodes[0];
+	var parentUl = jsvIsIE?n.parentElement:n.parentNode;
+	var childUl = parentUl.childNodes[3];
+	
+	
+	if(childUl.style.display == "block" || childUl.style.display == "")
+	{
+		childUl.style.display = "none";
+		childImg.src = jsvExpandIconUrl;
+		childImg.alt = "Expand";
+		childImg.title = "Expand";
+	}
+	else
+	{
+		childUl.style.display = "block";
+		childImg.src = jsvContractIconUrl;
+		childImg.alt = "Reduce";
+		childImg.title = "Reduce";
+	}
+}
+
+function jsfToggleAll(state)
+{
+	lists = document.getElementsByTagName('ul');
+	
+	
+	for(i=0;i<lists.length;i++)
+	{
+		if((jsvIsIE&&lists[i].parentElement.parentElement.tagName=="UL")||lists[i].parentNode.parentNode.tagName=="UL")
+		{
+			lists[i].style.display=state;
+		}
+		if(lists[i].parentNode.childNodes[0].tagName=="A")
+		{
+			
+		}
+		
+		if((jsvIsIE&&lists[i].parentElement.childNodes[0].childNodes[0].tagName=="IMG")||lists[i].parentNode.childNodes[0].tagName=="A")
+		{
+			if(imgNode = jsvIsIE?lists[i].parentElement.childNodes[0].childNodes[0]:lists[i].parentNode.childNodes[0].childNodes[0])
+			{
+				if(state=='block')
+				{
+					imgNode.src = jsvContractIconUrl;
+					imgNode.alt = "Reduce";
+					imgNode.title = "Reduce";
+				}
+				else
+				{
+					imgNode.src = jsvExpandIconUrl;
+					imgNode.alt = "Expand";
+					imgNode.title = "Expand";
+				}
+			}
+		}
+	}
+}
+
+function jsfExpandAll()
+{
+	jsfToggleAll('block');
+	jsfSwapjsfShowAlljsfHideAll();
+}
+
+function jsfCollapseAll()
+{
+	jsfToggleAll('none');
+	jsfSwapjsfShowAlljsfHideAll();
+}
+
+function jsfSwapjsfShowAlljsfHideAll()
+{
+	if(jsfShowAllDiv = document.getElementById("jsIdShowAll"))
+	{
+		jsfShowAllDiv.style.display = jsfShowAllDiv.style.display=="block"?"none":"block";
+	}
+	
+	if(jsfHideAllDiv = document.getElementById("jsIdHideAll"))
+	{
+		jsfHideAllDiv.style.display = jsfHideAllDiv.style.display=="block"?"none":"block";
+	}
+}
+
+function jsfExpandAllLink()
+{
+	jsfExpandAll()
+	if(document.getElementById("jsIdExpandAll"))
+	{
+			document.getElementById("jsIdExpandAll").style.display = "none";
+	}
+	if(document.getElementById("jsIdCollapseAll"))
+	{
+			document.getElementById("jsIdCollapseAll").style.display = "block";
+	}
+}
+
+function jsfCollapseAllLink()
+{
+	jsfCollapseAll()
+	if(document.getElementById("jsIdExpandAll"))
+	{
+			document.getElementById("jsIdExpandAll").style.display = "block";
+	}
+	if(document.getElementById("jsIdCollapseAll"))
+	{
+			document.getElementById("jsIdCollapseAll").style.display = "none";
+	}
+}
+
+
+function jsfShowHide(id)
+{
+	divObj = document.getElementById("jsIdShowHideDiv"+id);
+	imgObj = document.getElementById("jsIdShowHideImg"+id);
+	if(divObj.style.display=="none")
+	{
+		divObj.style.display = 'block';
+		imgObj.src = jsvContractIconUrl;
+	}
+	else
+	{
+		divObj.style.display = 'none';
+		imgObj.src = jsvExpandIconUrl;
+	}
+}
+
+function jsfHideAll()
+{
+	for(i=01;i<20;i++)
+	{
+		iStr = i<10?"0"+i:i;
+		if(divObj = document.getElementById("jsIdShowHideDiv"+iStr))
+		{
+			imgObj = document.getElementById("jsIdShowHideImg"+iStr);
+			divObj.style.display = "none";
+			imgObj.src = jsvExpandIconUrl;
+		}
+	}
+	jsfSwapjsfShowAlljsfHideAll();
+}
+
+function jsfShowAll()
+{
+	for(i=01;i<20;i++)
+	{
+		iStr = i<10?"0"+i:i;
+		if(divObj = document.getElementById("jsIdShowHideDiv"+iStr))
+		{
+			imgObj = document.getElementById("jsIdShowHideImg"+iStr);
+			divObj.style.display = "block";
+			imgObj.src = jsvContractIconUrl;
+		}
+	}
+	jsfSwapjsfShowAlljsfHideAll();
+}
+
+function jsfAutoSwap()
+{
+	if(jsvRotationStop==false)
+	{
+		if(document.getElementById("jsMainBanner01").style.display == "block")
+		{
+			document.getElementById("jsMainBanner01").style.display = "none";
+			document.getElementById("jsMainBanner02").style.display = "block";
+			document.getElementById("jsMainBanner03").style.display = "none";
+			setTimeout("jsfAutoSwap()", 6000);
+			return;
+		}
+		if(document.getElementById("jsMainBanner02").style.display == "block")
+		{
+			document.getElementById("jsMainBanner01").style.display = "none";
+			document.getElementById("jsMainBanner02").style.display = "none";
+			document.getElementById("jsMainBanner03").style.display = "block";
+			setTimeout("jsfAutoSwap()", 6000);
+			return;
+		}
+		if(document.getElementById("jsMainBanner03").style.display == "block")
+		{
+			document.getElementById("jsMainBanner01").style.display = "block";
+			document.getElementById("jsMainBanner02").style.display = "none";
+			document.getElementById("jsMainBanner03").style.display = "none";
+			setTimeout("jsfAutoSwap()", 6000);
+			return;
+		}
+	}
+}
+
+function jsfHomepageBannerSwap(swapSection)
+{
+	switch(swapSection)
+	{
+		case 1:
+			document.getElementById("jsMainBanner01").style.display = "block";
+			document.getElementById("jsMainBanner02").style.display = "none";
+			document.getElementById("jsMainBanner03").style.display = "none";
+			break;
+		case 2:
+			document.getElementById("jsMainBanner01").style.display = "none";
+			document.getElementById("jsMainBanner02").style.display = "block";
+			document.getElementById("jsMainBanner03").style.display = "none";
+			break;
+		case 3:
+			document.getElementById("jsMainBanner01").style.display = "none";
+			document.getElementById("jsMainBanner02").style.display = "none";
+			document.getElementById("jsMainBanner03").style.display = "block";
+			break;
+	}
+	clearTimeout(jsvTimeoutId);
+	jsvTimeoutId = setTimeout("jsfAutoSwapStart()", 10000);
+	jsvRotationStop = true;
+}
+
+function jsfAutoSwapStart()
+{
+	jsvRotationStop = false;
+	jsfAutoSwap();
+}
+
+
+
+
+function jsfOnLoad()
+{
+	setFontSize();
+	if(document.getElementById("jsIdShowHideDiv03") || document.getElementById("jsIdShowHideDiv01"))
+	{
+		for(i=01;i<20;i++)
+		{
+			iStr = i<10?"0"+i:i;
+			if(divObj = document.getElementById("jsIdShowHideDiv"+iStr))
+			{
+				jsfShowHide(iStr);
+			}
+		}
+	}
+	
+	if(document.getElementById("jsSiteMap"))
+	{
+		jsfCollapseAll()
+	}
+	
+	if(hpBanner02 = document.getElementById("jsMainBanner02"))
+	{
+		hpBanner02.style.display = 'none';
+		document.getElementById("jsMainBanner01").style.display = "block";
+		setTimeout("jsfAutoSwap()", 5000);
+	}
+	
+	if(hpBanner03 = document.getElementById("jsMainBanner03"))
+	{
+		hpBanner03.style.display = 'none';
+	}
+	
+	if(pageOptions = document.getElementById("jsIdPageOptions"))
+	{
+		pageOptions.style.display = 'block';
+	}
+	
+	if((hideAllDiv = document.getElementById("jsIdHideAll")) && (showAllDiv = document.getElementById("jsIdShowAll")))
+	{
+		hideAllDiv.style.display = "none";
+		showAllDiv.style.display = "block";
+	}
+}
+
+function submitForm (formName, elementName, commandName) {
+	document.forms[formName].all[elementName].name = commandName;
+	document.forms[formName].submit();
+}
+
+if (window.addEventListener)
+{
+	window.addEventListener("load", jsfOnLoad, false);
+}
+else
+{
+	if (window.attachEvent)
+	{
+		window.attachEvent("onload", jsfOnLoad);
+	}
+	else
+	{
+	if (document.getElementById)
+		{
+			window.onload = jsfOnLoad;
+		}
+	}
+}
+
+
+var TabNewWindow;
+
+function showTabNewWindow(url) {
+	if(TabNewWindow && !TabNewWindow.closed) {
+		TabNewWindow.open(url, "_self");
+	}
+	else {
+		TabNewWindow = window.open(url, "tabwin");
+	}
+	TabNewWindow.focus();
+	return TabNewWindow;
+}
+
+
+function jsfTriggerDropdownOutput(objId) {
+	jsvDropdownOuputArray[objId] = objId + "HideShow01," + objId + "HideShow02";
+
+	if((objReference = document.getElementById(objId))==null) {
+		return;
+	}
+	objReference.onchange = jsfOutputDropdownText;
+	this.id = objId;
+	jsfOutputDropdownText();
+}
+
+
+function jsfTriggerDropdownOutputFirstSelectionHidden(objId) {
+	jsvDropdownOuputArray[objId] = objId + "HideShow01," + objId + "HideShow02";
+
+	if((objReference = document.getElementById(objId))==null) {
+		return;
+	}
+	objReference.onchange = jsfOutputDropdownTextFirstSelectionHidden;
+	this.id = objId;
+	jsfOutputDropdownTextFirstSelectionHidden();
+}
+
+
+function jsfOutputDropdownText() {
+	if((objReference = document.getElementById(this.id))==null) {
+		return;
+	}
+	
+	document.getElementById(this.id+"Output").innerHTML = objReference.options[objReference.selectedIndex].innerHTML;
+}
+
+
+function jsfOutputDropdownTextFirstSelectionHidden() {
+	var hideShowArray = jsvDropdownOuputArray[this.id].split(",");
+	if((objReference = document.getElementById(this.id))==null) {
+		return;
+	}
+	
+	var index;
+	if (jsvIsIE) {
+		index = (objReference.contentIndex ? objReference.contentIndex : objReference.selectedIndex);
+	} else {
+		index = objReference.selectedIndex;
+	}
+
+	if(index==0) {
+		for(i=0;i<hideShowArray.length;i++) {
+			document.getElementById(hideShowArray[i]).style.display = "none";
+		}
+		return;
+	}
+	
+	for(i=0;i<hideShowArray.length;i++) {
+		if (jsvIsIE) {
+			document.getElementById(hideShowArray[i]).style.display = "block";
+		} else {
+			document.getElementById(hideShowArray[i]).style.display = "table-row";
+		}
+	}
+	
+	if (!jsvIsIE) {
+		document.getElementById(this.id+"Output").innerHTML = objReference.options[index].innerHTML;
+	}
+}
+
+// AOCFX005 ADD START
+// As the FX conversion account dropdown list can be empty
+// due to account type filter, so advoid to set the innerHTML
+// if no item selected in the dropdown list.
+function jsfOutputDropdownTextRefreshForFXConversion(varx) {	
+	if((objReference = document.getElementById(varx))==null) {
+		return;
+	}
+	
+	if ( objReference.selectedIndex > 0 )
+	    document.getElementById(varx+"Output").innerHTML = objReference.options[objReference.selectedIndex].innerHTML;
+}
+// AOCFX005 ADD END
+
+function jsfOutputDropdownTextRefresh(varx) {	
+	if((objReference = document.getElementById(varx))==null) {
+		return;
+	}
+	document.getElementById(varx+"Output").innerHTML = objReference.options[objReference.selectedIndex].innerHTML;
+}
+
+
+function jsfOutputDropdownTextRefreshFirstSelectionHidden(varx) {
+	if((objReference = document.getElementById(varx))==null) {
+		return;
+	}
+	
+	var index;
+	if (jsvIsIE) {
+		index = (objReference.contentIndex ? objReference.contentIndex : objReference.selectedIndex);
+	} else {
+		index = objReference.selectedIndex;
+	}
+
+	if(index==0) {
+		document.getElementById(varx + "HideShow01").style.display = "none";
+		document.getElementById(varx + "HideShow02").style.display = "none";
+	}
+
+	if (!jsvIsIE) {
+		document.getElementById(varx+"Output").innerHTML = objReference.options[index].innerHTML;
+	} else {
+		
+		document.getElementById(varx+"Output").innerText = objReference.options[objReference.selectedIndex].innerHTML;
+	}
+}
+
+
+ 
+ 
+ 
+ 
+
+
+function alertMsg(alertPath)
+{  
+		if ((alertwin && alertwin.closed) || !alertwin)
+		{
+			alertwin = window.open(alertPath,"alertmsg","menubar=no,resizable=no,toolbar=no,directories=no,location=no,scrollbars=yes,status=no,screenX=200,screenY=410,dependent=no,width=380,height=280,top=410,left=180");
+			alertwin.focus();
+		}
+		alertTimer = setTimeout("redirect()",1000);
+}
+
+
+ 
+ 
+ 
+ 
+
+
+
+var DoubleByteSupport = false;
+
+ 
+ 
+ 
+ 
+
+
+var alertTimer;
+var alertwin;
+
+var accHistoryPrintTimer;
+var accHistoryPrintWin;
+
+var openPdfFileTimer;
+var openPdfFileWin;
+
+function closewin()
+{
+	killSession();
+
+	if (alertwin)
+	{
+		alertwin.close();
+		alertwin = null;
+		clearTimeout(alertTimer);
+	}
+		
+	closeAll();
+}
+
+function closewin()
+{
+	killSession();
+
+	if (alertwin)
+	{
+		alertwin.close();
+		alertwin = null;
+		clearTimeout(alertTimer);
+	}
+
+	if(accHistoryPrintWin)
+	{
+	 	accHistoryPrintWin.close();
+		accHistoryPrintWin = null;
+	 	clearTimeout(accHistoryPrintTimer);
+	}
+
+	if(openPdfFileWin)
+	{
+	 	openPdfFileWin.close();
+		openPdfFileWin = null;
+	 	clearTimeout(openPdfFileTimer);
+	}
+
+	closeAll();
+}
+
+function killSession()
+{
+	if (window.event)
+	{
+		if (window.event.clientX < 0 && window.event.clientY < 0)
+	      {
+	            window.open(contextRoot + "/servlet/KillSessionServlet", "KillSession", "width=1,height=1,resizable=no,menubar=no,toolbar=no,directories=no,location=no,scrollbars=no,status=no, fullscreen=no, titlebar=no, alwaysRaised=no, hotkeys=no");
+	      }
+	}
+}
+
+function getkey(e)
+{
+    if (window.event)
+        return window.event.keyCode;
+    else if (e)
+        return e.which;
+    else
+        return null;
+}
+
+
+ 
+ 
+ 
+ 
+
+
+ 
+ 
+  var ifSubmitForm = "no";
+  var contextRoot  = "/P2G_PortalWeb";
+  var contextPath  = "/hubpib";
+var message="This function is not allowed within HSBC Internet banking.";
+ 
+window.history.forward(1);
+document.oncontextmenu = function(){return false}
+
+if (navigator.appName == "Netscape")
+{
+   document.onkeypress = function(e) {
+   	var c = document.layers ? e.which : document.all ? event.keyCode : e.keyCode;		
+   	//if (c == 116 && navigator.appVersion.indexOf("Safari") < 0 ) {
+	//	alert(message);
+	//	return false;
+	//}
+	var key = "", keychar = "";
+	key = getkey(window.event);
+	if (key != null) {
+		keychar = String.fromCharCode(key);
+	}
+	
+   	if (c == 116 && keychar== "") {
+		alert(message);
+		return false;
+	}
+   }
+}
+else {
+	document.onkeydown = function(){
+		if(window.event && window.event.keyCode == 116) 
+        	{ 
+			window.event.keyCode = 505;
+  		}
+
+		if(window.event && window.event.keyCode == 505) {
+			alert(message);
+			return false; 
+		}
+	}
+}
+
+
+
+var ifSubmitFormNoFrame = false;
+
+
+
+if(parent != null && parent.ifSubmitForm != null) 
+{ 
+	parent.ifSubmitForm = "no";
+} 
+
+
+function setHttpReqCrtlFlg()
+{
+	if(parent != null && parent.ifSubmitForm != null)
+	{
+		parent.ifSubmitForm = "yes";
+	}
+}
+
+
+function chgLocation(link)
+{
+	setHttpReqCrtlFlg();
+	location.replace(link);
+	return;
+}
+
+
+ 	
+function goToNewLocation(link)
+{
+	
+	
+
+}
+
+
+	
+
+function goToNewLocation2(cRoot, link)
+{
+	
+	
+	
+
+}
+
+
+
+
+
+function formSubmit3(reqType)
+{
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+function formSubmit(form)
+{
+	if(!checkIfSubmittedForm())
+	{
+		setHttpReqCrtlFlg();
+		form.submit();
+	}
+	return;
+}
+
+
+
+
+
+function form1Submit() 
+{
+
+}
+
+
+
+function formSubmit2(id)
+{
+
+	alert("The javascript function 'formSubmit2(id)' is obsolete.");
+}
+
+
+function checkIfSubmittedForm()
+{
+  if(parent != null && parent.ifSubmitForm != null && parent.ifSubmitForm=="yes")
+  {
+    return true;
+  }
+  else
+  {
+    return false;
+  }
+}
+
+
+
+
+
+
+ 
+function checkIfSubmittedFormNoFrame()
+{
+   
+}
+
+
+
+
+
+
+ 
+function setIfSubmittedFormNoFrame(flag)
+{
+
+}
+
+
+
+
+
+
+ 
+function inputFormSubmitNoFrame()
+{
+
+}
+
+
+
+
+
+
+
+ 
+function formSubmitNoFrame(form)
+{
+
+}
+
+
+
+
+
+
+
+ 
+   
+function chgLocationNoFrame(link)
+{
+
+ 
+}
+
+
+
+
+
+
+
+
+
+ 
+function showPopupNoFrame(popup)
+{
+
+}
+
+
+
+function click1(e)
+{
+	if (document.all)
+	{
+		if (event.button == 2)
+		{ 
+			alert(message); 
+			return false; 
+		} 
+	} 
+	if (document.layers) 
+	{ 
+		if (e.which == 3 || e.which == 2) 
+		{ 
+			alert(message); submitForm = "no"; 
+ 			return false; 
+		} 
+	} 
+}
+
+function click2(e) 
+{ 
+	if (e.which == 3 || e.which == 2) 
+	{ 
+		alert(message); 
+		return false; 
+	} 
+} 
+
+var s = navigator.appVersion; 
+var len = s.length; 
+var t = s.substring (0, 3); 
+var ver = parseFloat(t); 
+
+if ( (navigator.appName == "Netscape") && (ver >=5)) 
+	document.onmouseup=click2; 
+else 
+	document.onmousedown=click1;
+
+
+if (navigator.appName == "Netscape")
+{
+    window.onfocus = function()
+    {
+        if (document.inputForm)
+        {
+            for (var i = 0; i < document.inputForm.length; i++)
+            {
+                document.inputForm[i].onkeypress = function(e)
+                {
+                    var c = document.layers ? e.which : document.all ? event.keyCode : e.keyCode;		
+                    if (document.inputForm[i].type != "textarea" && (c == 13 || c == 3)) return false;
+                };
+            }
+        }
+        window.onfocus = null;
+    };
+}
+else
+{
+    document.onkeypress = function(e)
+    {
+        var c = document.layers ? e.which : document.all ? event.keyCode : e.keyCode;
+        if ((document.activeElement.type == "text" || document.activeElement.type == "password") && (c == 13 || c == 3)) return false;
+    };
+}
+
+
+ 
+ 
+ 
+ 
+
+
+if (navigator.childWin == null)
+{
+   navigator.childWin = new Array();
+}
+var childWin = navigator.childWin;
+
+
+function showChild(ID, ChildHTMLFile, Rules)
+{
+  if (!Rules)
+    childWin[ID] = window.open(ChildHTMLFile,ID,'dependent=yes,resizable=yes,width=640,height=500,screenX=0,screenY=0,left=0,top=0,titlebar=yes,scrollbars=yes');
+  else
+    childWin[ID] = window.open(ChildHTMLFile,ID,Rules);
+	
+  return childWin[ID];
+}
+
+function closeChild(ID)
+{
+  if (childWin[ID] != null)
+  {
+    childWin[ID].close();
+    childWin[ID] = null;
+  }
+}
+
+function closeAll()
+{
+  closeChild(1);
+  closeChild(2);
+  closeChild(3);
+  closeChild(4);
+  closeChild(5);
+  closeChild(6);
+  closeChild(7);
+  closeChild(8);
+  closeChild(9);
+  closeChild(10);
+  closeChild('help');
+  closeChild('Timer'); 
+  closeChild('Alert');  
+  closeChild('checkQuota');
+}
+
+
+function showProductSpecificInterestRateInquiry(url, productType, currency)
+{
+	if ((currency > 0) && (productType > 0))
+	{
+
+   	showChild(1, (url+'&accountType='+productType+'&depositCurrency='+currency), 'dependent=yes,width=480,height=510,screenX=0,screenY=0,left=0,top=0,titlebar=yes');
+	return false;
+	}
+	else
+	{
+
+		return true;
+	}
+}
+
+function showInterestRateInquiry(url)
+{
+	showChild(1, url, 'scrollbars=yes,dependent=yes,width=600,height=500,screenX=0,screenY=0,left=0,top=0,titlebar=yes');
+}
+
+
+function showCheckBalance(url, debitAccountIndex)
+{ 
+  return showChild(6, url+'&debitAccountIndex='+debitAccountIndex, 'dependent=yes,width=480,height=510,screenX=0,screenY=0,left=0,top=0,titlebar=yes');
+}  
+
+
+function showAcHistoryPrint(url)
+{
+  return showChild(9, url, 'scrollbars=yes,dependent=yes,width=700,height=500,screenX=0,screenY=0,left=0,top=0');
+}
+
+function showCheckBalance(url)
+{
+  return showChild(6, url, 'scrollbars=yes,dependent=yes,width=600,height=500,screenX=0,screenY=0,left=0,top=0');
+}
+
+//AOCFX005 ADD START
+function showCheckFXQuota(url)
+{
+  return showChild('checkQuota', url, 'scrollbars=yes,dependent=yes,width=600,height=500,screenX=0,screenY=0,left=0,top=0');
+}
+//AOCFX005 ADD END
+
+function showProductFeatures(nextPage)
+{
+	showChild(2, nextPage, 'scrollbars=yes,width=600,height=500,screenX=0,screenY=0,left=0,top=0,titlebar=yes');
+}
+
+
+function showHelp(url)
+{
+	showChild('help', url, ' width=650, height=400, menubar=no, resizable-no, toolbar=no,directories=no,location=no,scrollbars=yes,status=yes,copyhistory=0');
+}
+
+function showTimeout(url)
+{
+
+	showChild('Timer', url, 'dependent=yes,width=390,height=300,resizable=no,menubar=no,toolbar=no,directories=no,location=no,scrollbars=no,status=no, fullscreen=no, titlebar=no, alwaysRaised=yes, hotkeys=no');
+}
+
+function showAlert(url)
+{
+	return showChild('Alert', url, 'dependent=yes,resizable=no,screenX=0,screenY=0,left=0,top=0,titlebar=yes,scrollbars=no');
+}
+
+
+function showPdf(pdfIndex, form)
+{
+	var id = 10;
+	form.pdfDwnldIndex.value = pdfIndex;
+	form.target=id;
+	var rules = 'menubar=no, toolbar=no,directories=no,resizable=yes,location=no,scrollbars=no,status=yes,copyhistory=0, height=700,width=700,left=300,top=10';
+	childWin[id] = window.open("", id, rules);
+
+}
+
+function showLogonHelp(Lang)
+{
+  if (Lang)
+    showChild('help', contextRoot + contextPath + '/Helptext/en/Logon.htm', 'width=650, height=400, menubar=no, resizable-no, toolbar=no,directories=no,location=no,scrollbars=yes,status=yes,copyhistory=0');
+  else
+    showChild('help', contextRoot + contextPath + '/Helptext/zh/Logon.htm', 'width=650, height=400, menubar=no, resizable-no, toolbar=no,directories=no,location=no,scrollbars=yes,status=yes,copyhistory=0');
+}
+
+function showOrAckHelp(Lang)
+{
+  if (Lang)
+    showChild('help', contextRoot + contextPath + '/Helptext/en/OrAck.htm', 'width=650, height=400, menubar=no, resizable-no, toolbar=no,directories=no,location=no,scrollbars=yes,status=yes,copyhistory=0');
+  else
+    showChild('help', contextRoot + contextPath + '/Helptext/zh/OrAck.htm', 'width=650, height=400, menubar=no, resizable-no, toolbar=no,directories=no,location=no,scrollbars=yes,status=yes,copyhistory=0');
+}
+
+function showTermsAndConditionsHelp(Lang)
+{
+  if (Lang)
+    showChild('help', contextRoot + contextPath + '/Helptext/en/TermsAndConditions.htm', 'width=650, height=400, menubar=no, resizable-no, toolbar=no,directories=no,location=no,scrollbars=yes,status=yes,copyhistory=0');
+  else
+    showChild('help', contextRoot + contextPath + '/Helptext/zh/TermsAndConditions.htm', 'width=650, height=400, menubar=no, resizable-no, toolbar=no,directories=no,location=no,scrollbars=yes,status=yes,copyhistory=0');
+}
+
+function showCalendar()
+{
+
+top.newWin=showChild(4, 'javascript:document.write(parent.opener.calDocAll);self.focus();', 'scrollbars=yes,dependent=yes,width=280,height=700,screenX=0,screenY=0,left=0,top=0,titlebar=yes');
+  return top.newWin;
+}
+
+function showCalendarPortlet(url)
+{
+  top.newWin=showChild(4, url, 'scrollbars=yes,dependent=yes,width=280,height=700,screenX=0,screenY=0,left=0,top=0,titlebar=yes');
+  return top.newWin;
+}
+
+function showDisclaimer(disclaimerPath)
+{
+    return showChild(5, disclaimerPath, 'resizable=yes,width=700,height=500,left=0,top=0,scrollbars=yes');
+}
+
+function toLogon(url) 
+{
+  if (confirm('You have decided to reject the terms and conditions for using the Internet Banking service.  Click OK to exit from the registration process or click Cancel to resume your registration process.'))
+    {
+		window.open(url,'PreLogon');
+    }
+}
+
+function logonAgain(url) 
+{
+	window.open(url,'PreLogon');
+}
+
+function killSession(url)
+{
+    if (window.event)
+    {
+        if ((window.event.clientX < -5000 && window.event.clientY < -5000) || 
+            (window.event.clientX > 5000 && window.event.clientY > 5000))
+        {
+            window.open(url, "KillSession", "width=1,height=1,top=30000,left=30000,resizable=no,menubar=no,toolbar=no,directories=no,location=no,scrollbars=no,status=no, fullscreen=no, titlebar=no, alwaysRaised=no, hotkeys=no");
+        }
+    }
+}
+
+
+ 
+ 
+ 
+ 
+
+
+
+var da = (document.all) ? 1 : 0;
+var pr = (window.print) ? 1 : 0;
+var mac = (navigator.userAgent.indexOf("Mac") != -1);
+
+
+
+
+function printPage(frame, arg)
+{
+	if (frame == window)
+	{
+		printThis();
+	}
+	else
+	{
+		link = arg;  
+		printFrame(frame);
+	}
+}
+
+
+
+
+function printThis()
+{
+	if (pr)
+	{
+		window.print();
+	}
+	else if (da && !mac)
+	{
+		
+		vbPrintPage();
+	}
+	else
+	{
+		
+		if(mac)
+		{
+			alert("Please press your Print button on your iMac computer to print.");
+		}
+		else
+		{
+			alert("Sorry, your browser doesn't support this feature.");
+		}
+	}
+}
+
+
+
+
+
+function printFrame(frame)
+{
+	if (pr && da)
+	{
+		
+		frame.focus();
+		window.print();
+		link.focus();
+	}
+	else if (pr)
+	{
+		
+		frame.print();
+	}
+	else if (da && !mac)
+	{
+		
+		frame.focus();
+		setTimeout("vbPrintPage(); link.focus();", 100);
+	}
+	else
+	{
+		
+		if (mac)
+		{
+			alert("Please press your Print button on your iMac computer to print.");
+		}
+		else
+		{
+			alert("Sorry, your browser doesn't support this feature.");
+		}
+	}
+}
+
+
+if (da && !pr && !mac) with (document)
+{
+	writeln('<OBJECT ID="WB" WIDTH="0" HEIGHT="0" CLASSID="clsid:8856F961-340A-11D0-A96B-00C04FD705A2"></OBJECT>');
+	writeln('<' + 'SCRIPT LANGUAGE="VBScript">');
+	writeln('Sub window_onunload');
+	writeln('  On Error Resume Next');
+	writeln('  Set WB = nothing');
+	writeln('End Sub');
+	writeln('Sub vbPrintPage');
+	writeln('  OLECMDID_PRINT = 6');
+	writeln('  OLECMDEXECOPY_DONTPROMPTUSER = 2');
+	writeln('  OLECMDEXECOPT_PROMPTUSER = 1');
+	writeln(' On Error Resume Next');
+	writeln(' WB.ExecWB OLECMDID_PRINT, OLECMDEXECOPT_DOTPROMPTUSER');
+	writeln('End Sub');
+	writeln('<' + '/SCRIPT>');
+}
+
+ 
+ 
+ 
+ 
+
+
+
+var window_onload_fired = false;
+function setWindowOnLoadFlag() {
+	window_onload_fired = true;
+}
+if (window.attachEvent)
+	window.attachEvent("onload", setWindowOnLoadFlag);
+function dropdown_menu_hack( theSelect ) { 
+	if (theSelect.runtimeStyle.behavior.toLowerCase() == "none") {
+		return; 
+	}
+	theSelect.runtimeStyle.behavior="none";
+	if (theSelect && theSelect.length <= 0)
+	{
+		return;
+	}
+	if (window_onload_fired) {
+		expandingDropdownInit();
+	}
+	else {
+		window.attachEvent('onload',expandingDropdownInit ); 
+	}
+	function expandingDropdownInit() {
+		if (!this.doesExist) {
+			this.doesExist = 1;
+			this.divFrame = new DivFrame();
+		}
+		if (!theSelect.doesExist) {
+			theSelect.doesExist = 1;
+			theSelect.divFrame = this.divFrame;
+			selectInit(theSelect);
+		}
+	}
+	
+	function selectInit(theSelect) {
+		theSelect.contentOptions = new Array();
+		theSelect.contentIndex = theSelect.selectedIndex;
+		theSelect.contentHTML = theSelect.outerHTML;
+		theSelect.contentIndexSelected = theSelect.contentIndex;  
+		for(var i=0;i<theSelect.options.length;i++)
+		{
+			theSelect.contentOptions [theSelect.contentOptions.length] =
+			{
+				"value": theSelect.options[i].value,
+				"text": theSelect.options[i].innerHTML
+			}
+			if(!theSelect.options[i].selected){theSelect.options[i].removeNode(true);i--;};
+		}
+		theSelect.showMenu = function showMenu() {
+			theSelect.contentIndexSelected = theSelect.contentIndex; 
+			if (theSelect.divFrame.menuIsHidden())
+				theSelect.contentIndexOpened = theSelect.contentIndex; 
+			function selectMenu(obj)
+				{
+					var o = document.createElement("option");
+					o.value = theSelect.contentOptions[obj.selectedIndex].value;
+					o.innerHTML = obj.innerHTML;
+					while(theSelect.options.length>0){theSelect.options[0].removeNode(true);}
+					theSelect.appendChild(o);
+					theSelect.title =  o.innerHTML;  
+					theSelect.contentIndex = obj.selectedIndex;
+					theSelect.contentIndexSelected = theSelect.contentIndex; 
+					theSelect.writeToCell(); 
+					this.divFrame.hide(theSelect);
+				} 
+			  
+			var mb = this.divFrame.front; 
+			mb.style["margin"] = "0px";
+			mb.style["padding"] = "0px";
+			var t = theSelect.contentHTML;
+			t = t.replace(/<select/gi,'<ul');
+			t = t.replace(/<option/gi,'<li');
+			t = t.replace(/<\/option/gi,'</li');
+			t = t.replace(/<\/select/gi,'</ul');
+			mb.innerHTML = t;
+			theSelect.UL = mb.all.tags("ul")[0];
+			theSelect.UL.style.cssText = "list-style:none; margin:0; padding:0; width:100%;";
+			mb.options = theSelect.UL.getElementsByTagName("li");
+			mb.style.width = "0";
+			mb.style.direction = theSelect.style.direction;
+			mb.dir = theSelect.dir;
+			mb.style.fontFamily = theSelect.currentStyle.fontFamily;
+			mb.style.fontSize = theSelect.currentStyle.fontSize;
+			function unselectedOption( obj ) {
+				if (theSelect.style.backgroundColor)
+					obj.style.backgroundColor = theSelect.style.backgroundColor;
+				else
+					obj.style.backgroundColor = "Window";
+				if (theSelect.style.color)
+					obj.style.color = theSelect.style.color;
+				else
+					obj.style.color = "WindowText";
+			} 
+			function selectedOption (obj) {
+				obj.style.background="Highlight";
+				obj.style.color="HighlightText";
+				mb.options.selected = obj;
+			} 
+			for(var i=0;i<mb.options.length;i++)
+			{
+				mb.options[i].selectedIndex = i;
+				mb.options[i].style.cssText = "list-style:none; margin:0; padding:1px 2px; width:100%; cursor:default; white-space:nowrap; border-style: none;";
+				unselectedOption (mb.options[i]);
+				mb.options[i].onmousemove = function()
+					{ 
+						var ev = window.event;
+						if (ev.screenX == theSelect.divFrame.prevScreenX && ev.screenY == theSelect.divFrame.prevScreenY)
+							return false;
+						theSelect.divFrame.prevScreenX = ev.screenX;
+						theSelect.divFrame.prevScreenY = ev.screenY;
+						if( mb.options.selected ) {
+							unselectedOption (mb.options.selected);
+						}
+						selectedOption (this);
+						theSelect.contentIndex = this.selectedIndex;
+					} 
+				mb.options[i].onmousedown = function() {
+				  selectMenu(this);
+				  return true;
+				}
+				if(i == theSelect.contentIndex)
+				{
+					selectedOption (mb.options[i]);
+				}
+			} 
+			var mw = theSelect.offsetWidth;
+			mw = Math.max(  mw, ( mb.scrollWidth) ) + parseInt(mb.style.borderLeftWidth) + parseInt(mb.style.borderRightWidth) + (theSelect.divFrame.IEStrict ? 0 : (parseInt(mb.offsetWidth) - parseInt(mb.clientWidth)) );
+			var tbox = mb.options[0].getBoundingClientRect();
+			var lh = (tbox.bottom - tbox.top ); 
+			var mh =  (mb.options.length) * lh;
+			var mx = (this.divFrame.ie5)?-3:0;
+			var my = theSelect.offsetHeight;
+			var docH =   document.documentElement.offsetHeight ;
+			var bottomH = docH  - theSelect.getBoundingClientRect().bottom ; 
+			mh = Math.min(mh, Math.max(( docH - theSelect.getBoundingClientRect().top - 50),100) )
+						+ (theSelect.divFrame.IEStrict?0:parseInt(mb.style.borderTopWidth) + parseInt(mb.style.borderBottomWidth));
+			if(( bottomH < mh) )
+			{
+				mh = Math.max( (bottomH - lh),10);
+				if( mh <100 ) 
+				{
+					my = -100 ;
+				}
+				mh = Math.max(mh,100);
+			}
+			theSelect.divFrame.show( mx , my ,  mw, mh , theSelect);
+			mb.onblur = function() { 
+				if (theSelect.divFrame.menuIsDisplayed())
+					theSelect.divFrame.hide(theSelect);
+				}
+			mb.onkeydown = function(){ 
+				theSelect.switchMenu(); 
+				return false; 
+				}
+			mb.onmousewheel = function() { 
+				return false;
+				} 
+			if(mb.options.selected)
+			{
+			  var r = mb.options.selected.getBoundingClientRect();
+			  var opH;
+			  if (r)
+			    opH = r.bottom - r.top + 2;
+			  else
+			    opH = 20;
+			  
+			  if (mb.options.selected.offsetTop + opH > mb.scrollTop + mh)
+			    mb.scrollTop = mb.options.selected.offsetTop + opH - mh;
+			  
+			  else if (mb.options.selected.offsetTop < mb.scrollTop)
+			    mb.scrollTop = mb.options.selected.offsetTop;
+			  
+			}
+			  
+			window.onresize = function () { 
+				mb.onblur();
+			}
+	}  
+	theSelect.switchMenu = function switchMenu(ev) 
+	{
+		var event;
+		if (ev)
+			event = ev;
+		else if (window.event) 
+			event = window.event;
+		else if (document.frames && document.frames[fid] && document.frames[fid].event)
+			event = document.frames[fid].event;
+		else
+			event = null;
+	  if (!(event)) {
+	    return false;
+	  }
+		window.dropdownTimeoutFunc  = function() {
+			theSelect.click();
+		}
+		var prv = false;
+		var nxt = false;
+		var selectionMade = false;
+		var tabPressed = false;
+		if (event.keyCode)
+		{
+			prv = (event.keyCode == 38 || event.keyCode == 37); 
+			nxt = (event.keyCode == 40 || event.keyCode == 39); 
+			if ( event.altKey && (event.keyCode == 38 || event.keyCode == 40) ) {
+				if (theSelect.divFrame.menuIsDisplayed()) {
+					theSelect.divFrame.hide( theSelect );
+					theSelect.writeToCell();
+				}
+				else { 
+					window.setTimeout("(dropdownTimeoutFunc ())",0);
+				}
+				return false;
+			}
+			else if (event.keyCode == 33)
+				{ theSelect.contentIndex -= 8; }
+			else if (event.keyCode == 34)
+				{ theSelect.contentIndex += 8; }
+			else if (nxt) 
+				{ theSelect.contentIndex++; }
+			else if (prv) 
+				{ theSelect.contentIndex--; }
+			else if (event.keyCode == 27) 
+				{ 
+				}
+			else if (event.keyCode == 13) 
+				{
+					selectionMade = true;
+				}
+			else if (event.keyCode == 9)  
+				{
+					tabPressed = true;
+					selectionMade = true;
+				}
+			else 
+				{
+					return true;
+				}
+		} 
+		else if (event.wheelDelta)
+		{
+			if (event.wheelDelta >= 120)
+				theSelect.contentIndex--;
+			else if (event.wheelDelta <= -120)
+				theSelect.contentIndex++;
+		}
+		else 
+			{	return true; }
+		if (theSelect.contentIndex > (theSelect.contentOptions.length-1) ){ 
+			theSelect.contentIndex = theSelect.contentOptions.length-1;
+			if (nxt || prv || theSelect.contentIndex == theSelect.contentIndexSelected)
+				return false;
+		}	else if (theSelect.contentIndex < 0) {
+			theSelect.contentIndex = 0;
+			if (nxt || prv || theSelect.contentIndex == theSelect.contentIndexSelected)
+				return false;
+		}
+		
+		theSelect.contentIndexSelected = theSelect.contentIndex;
+		var o = document.createElement("option");
+		if ( event.keyCode == 27 && theSelect.divFrame.menuIsDisplayed()) {
+			theSelect.contentIndexSelected = theSelect.contentIndexOpened;
+			theSelect.divFrame.hide( theSelect );
+		}
+		o.value = theSelect.contentOptions[theSelect.contentIndex].value;
+		o.innerHTML = theSelect.contentOptions[theSelect.contentIndex].text;
+		while(theSelect.options.length>0){theSelect.options[0].removeNode(true);}
+		theSelect.appendChild(o);
+		theSelect.title =  o.innerHTML;  
+		if ( event.keyCode == 27) { 
+			theSelect.writeToCell();
+			return false;
+		}
+		if (theSelect.divFrame.menuIsDisplayed()){
+			if (selectionMade) {
+				theSelect.divFrame.hide( theSelect );
+				theSelect.writeToCell();
+				if (tabPressed) {
+					return true;
+				}
+			}
+			else
+				theSelect.showMenu(); 
+		}
+		else {
+			if (!tabPressed) {
+				theSelect.writeToCell();
+				theSelect.fireEvent("onchange"); 
+			}
+		}
+		return false; 
+	} 
+	theSelect.writeToCell = function writeToCell(someText)
+	{
+		var theId = null;
+		if (theSelect.id) theId = theSelect.id;
+		else if (theSelect.name) theId = theSelect.name;
+		if (!theId) return;
+		if (!someText)
+			someText = theSelect.contentOptions[theSelect.contentIndex].text;
+		var cell = document.getElementById(theId + "Output");
+		if (!cell) return;
+		else
+			cell.innerHTML = someText;
+	}
+		theSelect.onkeydown = function () {
+		  theSelect.switchMenu();
+		  return true;
+		}
+		theSelect.onmousedown = function () {
+			if (window.event.button != 1)
+				return;
+			window.dropdownTimeoutFunc  = function() {
+				theSelect.click();
+			}
+			if (theSelect.divFrame.menuIsHidden())
+				window.setTimeout("(dropdownTimeoutFunc ())", 0);
+			return false;
+		}
+		theSelect.onmousewheel = function () { 
+		  
+		  return false;
+		}
+		theSelect.onclick = function () {
+			theSelect.showMenu();
+			return true;
+		}
+		
+	}
+	function DivFrame() {
+		this.fid = "dropdown_menu_hack_" + Date.parse(new Date()); 
+		this.fbackid = this.fid+"_back"; 
+		this.ie5 = (document.namespaces==null);
+		this.IEStrict = (document.documentElement && document.documentElement.clientHeight);
+		if (!this.fback) {
+			this.fback = document.createElement("iframe");
+			this.fback.src = "javascript:false;";
+			this.fback.name = this.fbackid;
+			this.fback.scrolling = "no";
+			this.fback.border = "0";
+			this.fback.frameBorder = "0";
+			this.fback.vSpace = "0";
+			this.fback.hSpace = "0";
+			this.fback.marginHeight = "0";
+			this.fback.marginWidth = "0";
+			this.fback.style.cssText = "border:0px solid WindowFrame; padding:0px; margin:0px; visibility:hidden; top:0px; left:0px; width:0px; height:0px; position:absolute; filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=100);";
+		}
+		if (!this.front) {
+		  this.front = document.createElement("div");
+			this.front.id=this.fid;
+			this.front.style.cssText = "display:block; width:100px; height:100px; background:Window; color:WindowText; z-index:999999; top:0px; left:0px; position:absolute; border:1px solid WindowFrame; margin:0; padding:0; visibility:hidden; tab-index:999; background-color:Window;";
+			if (!this.IEStrict)
+				this.front.style.overflowY = "scroll";
+			else
+				this.front.style.overflowY = "auto";
+		}
+		this.fback.style.zIndex = (this.front.style.zIndex - 1);
+		document.body.appendChild(this.fback);
+		document.body.appendChild(this.front);
+		this.show = function(px,py,pw,ph,baseElement)
+				{ 
+					py = py + baseElement.getBoundingClientRect().top + Math.max( document.body.scrollTop, document.documentElement.scrollTop) - 2;
+					px = px + baseElement.getBoundingClientRect().left + Math.max( document.body.scrollLeft, document.documentElement.scrollLeft) - 2;
+					this.front.style.width = pw + "px";
+					this.front.style.height = ph + "px";
+					this.front.style.left = px;
+					this.front.style.top = py;
+					if (this.IEStrict)
+						this.fback.style.width = Math.max( (parseInt(this.front.scrollWidth) + 2 * parseInt(this.front.style.borderWidth) ), parseInt(this.front.offsetWidth) ) + "px";
+					else
+						this.fback.style.width = parseInt(this.front.offsetWidth) + "px";
+					this.fback.style.height = (parseInt(this.front.offsetHeight) + (this.IEStrict?0:0) ) + "px";
+					this.fback.style.left = parseInt(this.front.style.left) ;
+					this.fback.style.top = parseInt(this.front.style.top);
+					this.fback.style.visibility="visible";
+					this.front.style.visibility="visible";
+					this.front.focus();
+				}
+		this.hide = function hide(theSelect) {
+			if (this.menuIsHidden()) return;
+			if(window.event && window.event.srcElement
+				&& window.event.srcElement.tagName &&
+			  window.event.srcElement.tagName.toLowerCase()=="select") { return true; }
+			this.front.style.visibility="hidden";
+			this.fback.style.visibility="hidden";
+			this.front.style.width = "0";
+			this.front.style.height = "0";
+			
+			var sel = theSelect;
+			if (sel) {
+				sel.focus();
+				sel.contentIndex = sel.contentIndexSelected;
+				if (sel.contentIndex != sel.contentIndexOpened) {sel.fireEvent("onchange");}
+			}
+		}
+		this.menuIsHidden = function () {
+			return (this.front.style.visibility.toLowerCase() == "hidden");
+		}
+		this.menuIsDisplayed = function () {
+			return (!this.menuIsHidden());
+		}
+	}
+} 
+
+function showOneGeneration(nextPage)
+{
+	showChild('OneG', nextPage, 'scrollbars=yes,width=800,height=600,screenX=0,screenY=0,left=0,top=0,titlebar=yes');
+}
+
+// Start 2G3-1009 Changes
+function showCalendarPortlet_2G(url,frm,dateFieldName,isDateOfBirth)
+{	
+   url = url + "?targetForm="+frm.name;
+   url = url + "&toDateField="+ dateFieldName;
+
+   if (isDateOfBirth != null && isDateOfBirth != "")
+   {
+      url = url + "&isDateOfBirth="+isDateOfBirth;      
+   
+   }   
+	
+  top.newWin=showChild(4, url, 'scrollbars=yes,dependent=yes,width=280,height=700,screenX=0,screenY=0,left=0,top=0,titlebar=yes');
+
+}
+// End 2G3-1009 Changes
+
+
+function showCheckBalancePortlet_2G(url,accountHash)
+{	
+  url = url + "?ACCOUNT_HASH="+accountHash;
+
+  top.newWin=showChild(6, url, 'scrollbars=yes,dependent=yes,width=480,height=500,screenX=0,screenY=0,left=0,top=0,titlebar=yes');
+
+}
+
+// Changes made for OHI1.1a-NFR8 (Text and Mobile Banking) Started
+function PopUpHelp(ref)
+{
+	var PopUpHelp="toolbar=no,status=no,menubar=no,location=no,directories=no"
+	PopUpHelp=PopUpHelp+",scrollbars=no,resizable=yes,height=420,width=600"
+	PopUpHelp=PopUpHelp+",left=250,top=250"
+
+	onClick = window.open(ref,"HelpObj",PopUpHelp);
+       onClick.opener = top;
+}
+// Changes made for OHI1.1a-NFR8 (Text and Mobile Banking) End

@@ -1,0 +1,47 @@
+body
+{
+	margin: 0px;
+	font-family: Arial, Helvetica, sans-serif;
+	color: #000;
+}
+
+a img
+{
+	border:1px solid #000;
+}
+
+
+
+div.containerTabMenu,
+div.containerBreadCrumb,
+div.containerLeftNav,
+div.containerSearchArea,
+div.containerEntity,
+div.containerRightTools,
+.hsbcDivletFooterLinksLeft,
+.extInlineButtons img,
+p.extHrType01,
+div.hsbcDivletPageList
+{
+	display:none;
+}
+
+div.hsbcDivletLogo
+{
+	height:52px;
+	width:auto;
+}
+div.hsbcDivletLogo .hsbcDivletLogoImage
+{
+	padding:13px 0px 0px 0px;
+	float:left;
+	width:141px;
+}
+div.hsbcDivletLogo .hsbcDivletLogoTagLine
+{
+	float:left;
+	vertical-align:middle;
+	padding:18px 0px 0px 12px;
+	font:bold 14px Arial, Helvetica, sans-serif;
+	color:#f00;
+}

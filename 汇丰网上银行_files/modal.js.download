@@ -1,0 +1,262 @@
+/*
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//
+//Author       : Chandika Jayawardena, Bartlomiej Glownia
+//
+//Date        : 05 Novermebr 2014
+//
+//Description    : This module contains the functionality of the light box. Light box content get via different location (cross domain) JSONP call
+//
+//
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+*/
+
+//Native light box namespace
+IE6WarningLightbox = (function(){
+  var instance;
+  
+  var nativeLightBox = function() {
+    
+    this.initialized = false;
+    
+    this.init = function (content, languages) {
+      if (this.initialized) return false;
+      this.initialized = true;
+      this.content = content;
+      this.build(languages)
+      this.showLightBox();      
+      if (typeof window.attachEvent != 'undefined') {
+        window.attachEvent('onresize', function () {        
+          IE6WarningLightbox.getInstance().positionLightBox();  
+        });
+      }
+    };
+    
+    this.build = function (languages) {
+      this.wrapperElement = document.createElement("div");
+      this.wrapperElement.setAttribute('id', 'IE6WarningLightbox');  
+      document.getElementsByTagName("body")[0].appendChild(this.wrapperElement);
+      this.overlayElement = document.createElement("div");
+      this.overlayElement.setAttribute('id', 'IE6WarningLightboxOverlay');
+      this.boxElement = document.createElement("div");
+      this.boxElement.setAttribute('id', 'IE6WarningLightboxBox');
+      this.wrapperElement.appendChild(this.overlayElement);
+      this.wrapperElement.appendChild(this.boxElement);      
+      var boxContainer = document.createElement("div");
+      boxContainer.setAttribute('id', 'IE6WarningLightboxNativeBoxContainer'); 
+      this.boxElement.appendChild(boxContainer);
+      this.contentElement = document.createElement("div");
+      this.contentElement.setAttribute('id', 'IE6WarningLightboxContent');      
+      this.languageSelectorElement = document.createElement("div");
+      this.languageSelectorElement.setAttribute('id', 'IE6WarningLightboxLanguageSelector');       
+      var closeButton = document.createElement("a");
+      closeButton.setAttribute('href', '#');
+      closeButton.setAttribute('id', 'IE6WarningLightboxNativeBoxClose');
+      closeButton.setAttribute('title', 'Close');
+      this.overlayElement.onclick = closeButton.onclick = function () {
+        IE6WarningLightbox.getInstance().closeLightBox();
+        return false;
+      };
+      closeButton.innerHTML = '&nbsp;'
+      boxContainer.appendChild(this.languageSelectorElement);
+      boxContainer.appendChild(this.contentElement);
+      boxContainer.appendChild(closeButton);      
+      var defaultLanguage = null;
+      if (languages) {
+        var content = {}
+        for (var i=0; i < languages.length; i++) {
+          if (typeof this.content[languages[i]] != 'undefined') {
+            content[languages[i]] = this.content[languages[i]];
+          }          
+        }
+        this.content = content;
+      }      
+      var versionsCount = 0;
+      this.languageLinks = {};
+      for (var x in this.content){        
+        if (!defaultLanguage) {
+           defaultLanguage = x
+        }
+        var a = document.createElement("a");
+        a.setAttribute('href', '#');
+        a.setAttribute('title', this.content[x].label);
+        a.innerHTML = this.content[x].label;
+        a.onclick = function (x) {          
+          return function () {
+            IE6WarningLightbox.getInstance().loadContent(x);
+            return false;
+          }
+        }(x);
+        this.languageLinks[x] = a;
+        this.languageSelectorElement.appendChild(a);
+        versionsCount++;
+      }
+      if (versionsCount <= 1) {
+        this.languageSelectorElement.innerHTML = '&nbsp;';
+      }
+      this.loadContent(defaultLanguage);      
+    }
+    
+    //Request content and generate light box content structure
+    this.loadContent = function(language){
+      for (var i in this.languageLinks) {
+        this.languageLinks[i].className = language == i ? 'selected' : '';
+      }
+      this.contentElement.innerHTML = this.content[language].content;
+    };
+    
+    //Show light box    
+    this.showLightBox = function(){      
+      if (!this.initialized) return false;
+      this.wrapperElement.style.display = 'block';      
+      this.positionLightBox();
+    };         
+    
+    //Get page height
+    this.getPageHeight = function(){      
+      var body = document.body,
+      html = document.documentElement;
+      return Math.max(body.scrollHeight,body.offsetHeight,html.clientHeight,html.scrollHeight,html.offsetHeight);           
+    };
+    
+    //Remove light box from page
+    this.closeLightBox = function(){
+      if (!this.initialized) return false;
+      this.wrapperElement.style.display = "none";
+      return false;      
+    };
+    
+    //Position light box in the page view
+    this.positionLightBox = function(){      
+      if (!this.initialized) return false;
+      var _x = document.body.clientWidth;
+      var _y = document.body.clientHeight;
+      var _sx = document.documentElement.scrollTop;
+      var _sy = document.documentElement.scrollLeft;      
+      this.boxElement.style.left = Math.round((_x-this.boxElement.offsetWidth)/2)+_sy+"px";
+      this.boxElement.style.top = (_sx + 10) + "px"//Math.round((_y-this.__dh)/2)+_sx+"px";      
+      this.overlayElement.style.display = 'none';
+      var _h = this.getPageHeight();            
+      this.overlayElement.style.display = 'block';      
+      setTimeout(function () {IE6WarningLightbox.getInstance().positionOverlay();}, 1);            
+    };
+    
+    this.positionOverlay = function () {
+      if (!this.initialized) return false;
+      this.overlayElement.style.display = 'none';      
+      this.overlayElement.style.height = this.getPageHeight() + "px";
+      this.overlayElement.style.display = 'block';
+    }
+    
+    //Crete cookie 
+    this.setCookie = function(cookiename,cookievalue,exdays){    
+      var d = new Date();  
+      d.setTime(d.getTime() + (exdays*24*60*60*1000));
+      var expires = "expires="+d.toUTCString();  
+      document.cookie = cookiename + "=" + cookievalue + "; " + expires;      
+    };
+    
+    //Get cookie values
+    this.getCookie = function(cookiename){    
+      var name = cookiename + "=";
+      var ca = document.cookie.split(';');      
+      for(var i=0; i<ca.length; i++) {        
+        var c = ca[i];
+        while (c.charAt(0)==' ') c = c.substring(1);
+        if (c.indexOf(name) != -1) return c.substring(name.length, c.length);        
+      }    
+      return false;      
+    };
+    
+    //Get client browser  version
+    this.findBrowserVersion = function() {    
+      browserVersion = (function(){        
+        var ua= navigator.userAgent, tem, 
+        M= ua.match(/(opera|chrome|safari|firefox|msie|trident(?=\/))\/?\s*(\d+)/i) || [];
+        if(/trident/i.test(M[1])){
+          tem=  /\brv[ :]+(\d+)/g.exec(ua) || [];
+          return 'IE '+(tem[1] || '');
+        }
+        if(M[1]=== 'Chrome'){
+          tem= ua.match(/\bOPR\/(\d+)/)
+          if(tem!= null) return 'Opera '+tem[1];
+        }
+        M= M[2]? [M[1], M[2]]: [navigator.appName, navigator.appVersion, '-?'];
+        if((tem= ua.match(/version\/(\d+)/i))!= null) M.splice(1, 1, tem[1]);
+        return M.join(' ');        
+      })();    
+      return browserVersion;    
+    };
+    
+    //Check browser and SSL
+    this.isValidClient = function(){      
+      if(window.location.protocol.match(/^https/)) {        
+        var browserVersion = this.findBrowserVersion();        
+        if( browserVersion.match(/^MSIE 6$/)){          
+          return true;
+        }
+      }      
+      return false;
+    };  
+        
+    this.launch = function (rootUrl, languages) {
+      if (document.location.search.indexOf('showIE6Warning') > 0 || (this.isValidClient() && this.getCookie("IE6WarningDisplayed")!=1)){                                
+        this.setCookie("IE6WarningDisplayed",1,5);    
+        var lightbox = this;
+        window.setUpIE6WarningContent = function (content) {          
+          lightbox.init(content, languages);
+        }        
+        var script = document.createElement('script');
+        script.setAttribute("type","text/javascript")        
+        script.setAttribute("src", rootUrl + 'content.js');                        
+        var style = document.createElement('link');
+        style.setAttribute("rel","stylesheet")
+        style.setAttribute("type","text/css")
+        style.setAttribute("href", rootUrl + 'modal.css');
+        style.onload = function () {
+          IE6WarningLightbox.getInstance().positionLightBox();
+        }
+        var head = document.getElementsByTagName('head')[0];
+        head.appendChild(script);
+        head.appendChild(style);        
+      }
+    }
+    
+  }
+  
+  return {
+    getInstance: function(){
+      if(!instance){
+        instance = new nativeLightBox(); 
+      }
+      return instance; 
+    }
+  };
+
+})();
+
+
+!function () {    
+  if (typeof window.IE6WarningLightboxSrc == 'undefined') {
+    var scripts = document.getElementsByTagName('script');
+    window.IE6WarningLightboxSrc = scripts[scripts.length-1].src;
+    if (!window.IE6WarningLightboxSrc.match(/^http(s|):/)) {
+      window.IE6WarningLightboxSrc = window.location.protocol + window.IE6WarningLightboxSrc;
+    }
+  }
+  var parser = document.createElement('a');
+  parser.href = window.IE6WarningLightboxSrc;
+  var rootUrl = parser.protocol + '//' + parser.host + '/' + parser.pathname.replace(/\/[^\/]*$/, '/').replace(/^\//, '');
+  var languages = false;
+  var vars = parser.search.substring(1).split('&');
+  for (var i = 0; i < vars.length; i++) {
+    var pair = vars[i].split('=');
+    if (decodeURIComponent(pair[0]) == 'languages') {
+      languages = decodeURIComponent(pair[1]).split(',');
+    }
+  }
+  function r(f){/in/.test(document.readyState)?setTimeout(function () {r(f);},100):f()}
+  r(function () {    
+    IE6WarningLightbox.getInstance().launch(rootUrl, languages);    
+  })
+}();

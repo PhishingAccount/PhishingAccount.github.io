@@ -1,0 +1,4 @@
+.containerHeaderInner .headerContainer04 .divletNavigation .list01{ display:none;}
+.divletSupport ul li.first,.containerSubHeader{display: none;}
+.divletSupport ul li:first-child+li{background:none;}
+.divletLogo a{text-align: left;}
