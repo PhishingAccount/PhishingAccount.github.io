@@ -1,0 +1,11 @@
+define({
+    root: {
+        externalOverlayCloseHiddenText : "Close",
+        externalOverlayUnderstandBtn : "I understand, let's proceed",
+        externalOverlayNewWindow : "Opens in a new Window.",
+        externalOverlayCancelBtn :"Cancel"
+    },
+    "en": true,
+    "zh-hk": true,
+    "zh-cn": true
+});

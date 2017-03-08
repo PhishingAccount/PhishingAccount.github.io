@@ -1,0 +1,14 @@
+/**
+ * exported dojoConfig before delivering the code please make sure it should be false
+ * version : Jan_Prod_Release_Package_January_5th 
+ */
+var useStubData = false;
+var dojoConfig = {
+		isDebug : true, 
+		parseOnLoad : false,
+		async : true, 
+		baseUrl : '/clientapp', 
+		locale : (typeof friendlyLocale != "undefined") ? (friendlyLocale == "en-hk" ? "en" : friendlyLocale ): "en",
+
+//commenting as it has to be read from URL (as per requirement) 
+selectorEngine : "acme", packages : [{name : "dojo", location : "node_modules/dojo" }, {name : "dijit", location : "node_modules/dijit" }, {name : "dojox", location : "node_modules/dojox" }, {name : "hsbc", location : "hdx/js/hsbc" }, {name : "corehsbc", location : "node_modules/hsbc" }, {name : "hdx", location : "hdx" }, {name : "issw", location : "node_modules/issw" }, {name : "pws", location : "/ContentService/gsp/pws" }, {name : "group", location : "group" } ], map : {dijit : {"dijit/Dialog" : "hdx/patch/dijit/Dialog" }, Dialog : {"dijit/Dialog" : "hdx/patch/dijit/Dialog" } } };
