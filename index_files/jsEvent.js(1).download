@@ -1,1 +1,0 @@
-var HSBCHKtargetElement = document.getElementById('HSBCHKScriptElement');if(HSBCHKtargetElement)HSBCHKtargetElement.responseReceived = true;
