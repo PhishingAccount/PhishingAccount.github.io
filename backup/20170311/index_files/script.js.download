@@ -1,0 +1,12 @@
+require([ "hdx/layers/pws","hdx/layers/tool"]);
+require([ "dojo/dom-attr", "dojo/has", "dojo/ready"], function (domAttr, has, ready) {
+    ready(function () {
+        if (has('host-browser')) {
+            var bodyNode = document.body, controllerMid = domAttr.get(bodyNode, 'data-page-controller') || 'hsbc/controllers/PagesController', args = domAttr.get(bodyNode, 'data-page-args') || '';
+            args = new Function('return { ' + args + ' }')();
+            require([ controllerMid ], function (Controller) {
+                new Controller(args);
+            });
+        }
+    });
+});

@@ -1,0 +1,499 @@
+.languageSelector {
+    position: relative;
+    bottom: 12px;
+    height: 32px;
+    padding-top: 13px;
+    text-align: left;
+    width: auto;
+    display: inline-block;
+    margin-left: -1px;
+}
+
+.languageSelector .dijitMenuPopup {
+    background: #515358;
+    min-width: 192px;
+    /* left : auto !important;
+    right: 0 !important;			required if the suggested solution is accepted */
+}
+
+.languageSelector .dijitMenuPopup {
+    background: #515358;
+    min-width: 200px;
+    /* left : auto !important;
+    right: 0 !important;			required if the suggested solution is accepted */
+}
+
+.languageSelector .dijitPopup .dijitMenuTable .dijitMenuItemHover a, .languageSelector .dijitPopup .dijitMenuTable .dijitMenuItemFocused a {
+    text-decoration: none !important;
+    color: #fff !important;
+    background-color: #000 !important;
+}
+
+.languageSelector table tr:nth-child(2n) {
+    background-color: #515358;
+}
+
+.languageSelector a {
+    color: #fff;
+    float: left;
+    height: 40px;
+    line-height: 40px;
+    width: 100%;
+}
+
+.languageSelector .dijitPopup .dijitMenuTable tr td {
+    height: 40px;
+    float: left;
+    width: 100%;
+    border: none;
+    background-color: #d2d2d2;
+}
+
+.languageTitle {
+    margin-left: 5px;
+}
+
+li.languageSelector {
+    background-color: none;
+    bottom: 12px;
+    height: 27px;
+    position: relative;
+    padding-top: 13px;
+    text-align: left;
+    width: auto;
+    display: inline-block;
+}
+
+.languageSelectorOpen {
+    background-color: #515358;
+}
+
+.languageSelector .dijitPopup .dijitMenu {
+    border: 0 none;
+}
+
+.languageSelector .languageName {
+    float: left;
+    margin-left: 13px;
+}
+
+.languageSelector .dijitPopup table {
+    width: 100%;
+}
+
+.languageSelector .dijitPopup .dijitMenuTable .dijitMenuItemHover a span.icon-agree, .languageSelector .dijitPopup .dijitMenuTable .dijitMenuItemFocused a span.icon-agree {
+    color: #fff;
+    text-decoration: none;
+}
+
+.languageSelector .dijitPopup .dijitMenuTable .dijitMenuItemHover a span.languageTitle, .languageSelector .dijitPopup .dijitMenuTable .dijitMenuItemFocused a span.languageTitle {
+    text-decoration: none;
+    color: #fff !important;
+}
+
+.languageSelector span.icon-agree {
+    font-size: 1.5em;
+    color: #000;
+    margin: 9px 13px 0 0;
+    float: right;
+}
+
+.languageSelector .dijitPopup .dijitMenuTable tr.dijitMenuItemFocused td {
+    border: none !important;
+}
+
+.languageSelector .dijitPopup .dijitMenuTable tr.dijitMenuItemFocused td {
+    border: none !important;
+}
+
+.languageSelector .dijitDropDownButtonFocused .dijitReset.dijitStretch.dijitButtonContents.dijitDownArrowButton.span-modify {
+    border: 1px dotted #999;
+}
+
+.span-modify {
+    display: block;
+    height: 82%;
+    width: auto;
+}
+
+.not-selectedMenuItem {
+    color: #fff;
+    background-color: #515358;
+}
+
+.languageSelector .selectedLanguageMenuItem {
+    color: #000;
+    float: left;
+    height: 40px;
+    line-height: 40px;
+    width: 100%;
+}
+
+.languageSelector .selectedLanguageMenuItem .icon-agree {
+    color: #000;
+}
+
+.languageSelector .selectedLanguageMenuItem:hover {
+    background: none repeat scroll 0 0 #000;
+    color: #fff;
+    float: left;
+    height: 40px;
+    line-height: 40px;
+}
+
+.languageSelector .languageName:focus {
+    outline: 1px dotted #ff0;
+    outline-offset: 1px dotted #ff0;
+}
+
+.languageSelector .dijitPopup .dijitMenuTable tr.xyzActive {
+    background: none repeat scroll 0 0 #d2d2d2;
+    color: #000 !important;
+    float: left;
+    height: 40px;
+    line-height: 40px;
+    width: 100%;
+}
+
+.selectedLanguageMenuItem span.languageTitle {
+    color: #000 !important;
+}
+
+.languageSelector tr.dijitMenuItem:hover {
+    background: #000;
+    color: #fff;
+    float: left;
+    height: 40px;
+    line-height: 40px;
+    width: 100%;
+}
+
+.languageSelector .dijitPopup {
+    border: none;
+}
+
+.language-selctor-div {
+    padding: 10px;
+}
+
+.rightheadtextlinks span.icon-chevron-down {
+    float: left;
+    font-size: 1.7em/* 20px */;
+    margin-left: 8px;
+    margin-top: -4px;
+    vertical-align: text-top;
+}
+
+@media only screen and (min-width: 60.063em) {
+    .utility-bar-container .languageSelector a.languageMain {
+        height: 23px;
+        line-height: 20px;
+        padding-top: 7px;
+    }
+
+    .utility-bar-container .languageSelector {
+        color: #fff;
+    }
+
+    .languageSelectorOpen {
+        background-color: #515358;
+    }
+
+    .actus.base .languageSelector a.languageMain:focus, .actus.base .languageSelector a.languageMain:hover {
+        text-decoration: none;
+        outline: 1px dotted;
+        color: #fff;
+    }
+
+    .actus.base .languageSelector a.languageMain:focus span, .actus.base .languageSelector a.languageMain:hover span {
+        text-decoration: none;
+    }
+
+    .languageSelector .languageMenu {
+        position: absolute;
+        top: 45px;
+        background-color: #515358;
+        min-width: 180px;
+        display: none;
+    }
+
+    .languageSelector .languageMenu li.languageMenuItem {
+        display: block;
+        clear: both;
+        width: 100%;
+    }
+
+    .languageSelector .languageMenu li.languageMenuItem a {
+        padding: 0 5px 0 13px;
+        width: 90%;
+    }
+
+    .languageSelector .languageMenu .selectedMenuItem {
+        color: #fff;
+        background-color: #000;
+    }
+
+    .languageSelector .languageMenu .selectedMenuItem:hover, .languageSelector .languageMenu .not-selectedMenuItem:hover,
+    .languageSelector .languageMenu .selectedMenuItem:focus, .languageSelector .languageMenu .not-selectedMenuItem:focus {
+       text-decoration: none;
+       
+    }
+
+	.languageSelector .languageMenu .selectedMenuItem:hover span, .languageSelector .languageMenu .not-selectedMenuItem:hover span,
+    .languageSelector .languageMenu .selectedMenuItem:focus span, .languageSelector .languageMenu .not-selectedMenuItem:focus span {
+       text-decoration: underline;
+       color: #fff;
+    }
+
+    .languageMenuItem .selectedMenuItem:after {
+        content: "\f00a";
+        display: inline-block;
+        speak: none;
+        font-family: hsbcicons_regular;
+        float: right;
+        font-size: 1.5em;
+        margin-right: 13px;
+    }
+}
+
+@media ( min-width: 32.563em) and (max-width: 60em) {
+    .sub-menu-section .language-selctor-div {
+        margin: 20px 5px 20px -5px;
+        clear: both;
+    }
+
+    .sub-menu-section .icon-agree {
+        float: right;
+        font-size: 1.5em;
+        margin-right: 0;
+        margin-top: -8px;
+    }
+
+    div.doormatmenu a.not-selectedMenuItem {
+        background-color: #d4d4d4 !important;
+        color: #333;
+    }
+
+    li.languageMenuItem {
+        padding: 0;
+    }
+
+    a.lselect span.icon-left-tab {
+        margin-left: -2px;
+        margin-top: 2px;
+    }
+
+    a.lselect span.headtext {
+        padding: 0 0 0 36px !important;
+    }
+
+	.languageMenuItem a:focus{
+		text-decoration: underline;
+	}
+    .languageMenuItem .selectedMenuItem span:after {
+        content: "\f00a";
+        display: inline-block;
+        speak: none;
+        font-family: hsbcicons_regular;
+        font-size: 1.5em;
+        margin-top: -7px;
+        padding-left: 5px;
+    }
+    a.lselect + div.doormatmenu{
+    	background-color: #404040 !important;
+    	color: #fff !important;
+    }    
+	
+	div.doormatmenu ul li.languageMenuItem a.not-selectedMenuItem { background: none !important; }
+    div.doormatmenu ul li.languageMenuItem a.selectedMenuItem { background: #000 !important; }
+
+	div.doormatmenu ul li.languageMenuItem a.not-selectedMenuItem,
+	div.doormatmenu ul li.languageMenuItem a.selectedMenuItem {
+		color: #CCCCCC;
+    	padding: 10px;
+    	font-size: .875em;
+    	display: block;
+	}
+	
+	a.lselect + div.doormatmenu p.doormat-head{
+		border-bottom: 1px solid #4e4e4e;
+	}
+	
+	.doormatmenu .columns.full-width { width: 100%; }
+}
+
+@media ( min-width: 0) and (max-width: 32.5em) {
+    .sub-menu-section .language-selctor-div {
+        margin: 20px 5px 20px -5px;
+        clear: both;
+    }
+
+    .sub-menu-section .icon-agree {
+        float: right;
+        font-size: 1.5em;
+        margin-right: 0;
+        margin-top: -8px;
+    }
+
+    div.doormatmenu a.not-selectedMenuItem {
+        background-color: #d4d4d4 !important;
+        color: #333;
+    }
+	
+	div.doormatmenu ul li.languageMenuItem a.not-selectedMenuItem { background: none !important; }
+    div.doormatmenu ul li.languageMenuItem a.selectedMenuItem { background: #000 !important; }
+
+	div.doormatmenu ul li.languageMenuItem a.not-selectedMenuItem,
+	div.doormatmenu ul li.languageMenuItem a.selectedMenuItem {
+		color: #CCCCCC;
+    	padding: 10px 10px 10px 15px;
+    	font-size: .875em;
+    	display: block;
+	}
+	a.lselect + div.doormatmenu p.doormat-head{
+		border-bottom: 1px solid #4e4e4e;
+	}
+	
+	.doormatmenu .columns.full-width { width: 100%; }
+
+    li.languageMenuItem {
+        padding: 0;
+    }
+
+    a.lselect span.icon-left-tab {
+        margin-left: -5px;
+        margin-top: 7px;
+    }
+
+    a.lselect span.headtext {
+        padding: 5px 0 0 31px !important;
+    }
+
+	.languageMenuItem a:focus{
+		text-decoration: underline;
+	}
+	
+    .languageMenuItem .selectedMenuItem span:after {
+        content: "\f00a";
+        display: inline-block;
+        speak: none;
+        font-family: hsbcicons_regular;
+        font-size: 1.5em;
+        margin-top: -7px;
+        padding-left: 5px;
+    }
+    
+    a.lselect + div.doormatmenu{
+    	background-color: #404040 !important;
+    	color: #fff !important;
+    }
+}
+
+
+/********************************* IE7/IE8 styles *********************************/
+
+.dj_ie7 .utility-bar-container .languageSelector a.languageMain,
+.dj_ie8 .utility-bar-container .languageSelector a.languageMain {
+    height: 23px;
+    line-height: 20px;
+    padding-top: 7px;
+}
+
+.dj_ie7 .utility-bar-container .languageSelector,
+.dj_ie8 .utility-bar-container .languageSelector {
+    color: #fff;
+}
+
+.dj_ie7 .languageSelectorOpen,
+.dj_ie8 .languageSelectorOpen {
+    background-color: #515358;
+}
+
+.dj_ie7 .actus.base .languageSelector a.languageMain:focus,
+.dj_ie8 .actus.base .languageSelector a.languageMain:focus,
+.dj_ie7 .actus.base .languageSelector a.languageMain:hover,
+.dj_ie8 .actus.base .languageSelector a.languageMain:hover {
+    text-decoration: none;
+    outline: 1px dotted;
+    color: #fff;
+}
+
+.dj_ie7 .actus.base .languageSelector a.languageMain:focus span,
+.dj_ie8 .actus.base .languageSelector a.languageMain:focus span,
+.dj_ie7 .actus.base .languageSelector a.languageMain:hover span,
+.dj_ie8 .actus.base .languageSelector a.languageMain:hover span {
+    text-decoration: none;
+}
+
+.dj_ie7 .languageSelector .languageMenu,
+.dj_ie8 .languageSelector .languageMenu {
+    position: absolute;
+    top: 45px;
+    left: 0;
+    background-color: #515358;
+    min-width: 140px;
+    display: none;
+}
+
+.dj_ie7 .languageSelector .languageMenu li.languageMenuItem,
+.dj_ie8 .languageSelector .languageMenu li.languageMenuItem {
+    display: block;
+    clear: both;
+    width: 100%;
+    float: none;
+}
+
+.dj_ie7 .languageSelector .languageMenu li.languageMenuItem a,
+.dj_ie8 .languageSelector .languageMenu li.languageMenuItem a {
+    padding: 0 5px 0 13px;
+    width: 90%;
+    float: none;
+    display: block;
+    overflow: hidden;
+}
+
+.dj_ie7 .languageSelector .languageMenu .selectedMenuItem,
+.dj_ie8 .languageSelector .languageMenu .selectedMenuItem {
+    color: #fff;
+    background-color: #000;
+}
+
+.dj_ie7 .languageSelector .languageMenu .selectedMenuItem:hover span,
+.dj_ie8 .languageSelector .languageMenu .selectedMenuItem:hover span,
+.dj_ie7 .languageSelector .languageMenu .not-selectedMenuItem:hover span,
+.dj_ie8 .languageSelector .languageMenu .not-selectedMenuItem:hover span,
+.dj_ie7 .languageSelector .languageMenu .selectedMenuItem:focus span,
+.dj_ie8 .languageSelector .languageMenu .selectedMenuItem:focus span,
+.dj_ie7 .languageSelector .languageMenu .not-selectedMenuItem:focus span,
+.dj_ie8 .languageSelector .languageMenu .not-selectedMenuItem:focus span{
+    color: #fff;
+    text-decoration: underline;
+}
+
+.dj_ie7 .languageSelector .languageMenu .selectedMenuItem:hover span.icon-agree,
+.dj_ie8 .languageSelector .languageMenu .selectedMenuItem:hover span.icon-agree,
+.dj_ie7 .languageSelector .languageMenu .selectedMenuItem:focus span.icon-agree,
+.dj_ie8 .languageSelector .languageMenu .selectedMenuItem:focus span.icon-agree {
+    color: #fff;
+    text-decoration: none;
+}
+
+.dj_ie7 .languageMenuItem .selectedMenuItem {
+    background-image: url(/clientapp/hdx/images/icons/icon-selectedmenu-tick.png);
+    background-position: right center;
+    background-repeat: no-repeat;
+}
+
+.dj_ie8 .languageMenuItem .selectedMenuItem:after {
+    content: "\f00a";
+    display: inline-block;
+    speak: none;
+    font-family: hsbcicons_regular;
+    float: right;
+    font-size: 1.5em;
+    margin-right: 13px;
+}
+
+.dj_ie7 .languageMenuItem a span{
+    line-height: 40px;
+}

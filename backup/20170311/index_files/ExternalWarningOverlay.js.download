@@ -1,0 +1,65 @@
+define(["dojo/_base/declare", "dijit/_TemplatedMixin", "dijit/_WidgetsInTemplateMixin", "dijit/_WidgetBase", "dojo/_base/lang", "dojo/topic", "dojo/on", "dojo/aspect", "hsbc/_ECAMixin", "dojo/dom-attr", "dojo/dom-style", "dojo/dom-construct", "dojo/_base/window", "dojo/window", "dojo/text!./template/ExternalWarningOverlay.html", "hsbc/eca!dojo/i18n!pws/Components/common/nls/ExternalLinkWarning_nls", "dojo/query", "dojo/_base/array", "hdx/dijits/Dialog"], function(declare, _TemplatedMixin, _WidgetsInTemplateMixin, _WidgetBase, lang, topic, on, aspect, _ECAMixin, domAttr, domStyle, domConstruct, win, windowUtil, template, i18n, query, array) {
+	return declare("hdx.bijits.overlay.ExternalWarningOverlay", [_WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin, _ECAMixin ], {templateString : template, i18n : i18n, postCreate : function() {
+		topic.subscribe("hdx/bijits/OverlayData", lang.hitch(this, function(data) {
+			var anchorNode = data.anchorNode;
+			var clickAttr = data.clickAttr;
+			var redirectanchor = domAttr.get(anchorNode, "href");
+			var target = domAttr.get(anchorNode, "target");
+			var newWindow = data.checkNewWin;
+			var warning = data.warning;
+			this.cloneSubmit = lang.clone(this.submit);
+			if (clickAttr) {
+				this.submit.onclick = clickAttr;
+			}
+			if (target) {
+				domAttr.set(this.submit, "target", target);
+			}
+			domAttr.set(this.submit, "href", redirectanchor);
+			var hiddenspan = query("span.mobile-accessibleHidden", this.submit);
+			var hasNewWinSpan = hiddenspan.length > 0 ? true : false;
+			if(newWindow && !hasNewWinSpan){
+				domConstruct.place(domConstruct.toDom('<span class="mobile-accessibleHidden">' + i18n.externalOverlayNewWindow + '</span>'), this.submit);
+			}else if (!newWindow && hasNewWinSpan) {
+				domConstruct.destroy(hiddenspan[0]);
+			}
+			var matchGroup = false;
+			outerloop:
+			for (i = 0; i < warning.custom.length; i++){
+				var obj = warning.custom[i];
+				for (j = 0; j < obj.url.length; j++){
+					if(redirectanchor.search(obj.url[j])!= -1){
+						matchGroup = true;
+						this.addMessage(warning.custom[i]);
+						break outerloop;
+					}
+				}
+			}
+			if(!matchGroup){
+				this.addMessage(warning["default"]);
+			}
+		}));
+		
+		on(this.cancel, "click", lang.hitch(this, function() {
+			this.dialog.hide();
+			domStyle.set(win.body(), {overflowY : "auto" });
+		}));
+		on(this.closeDialogButton, "click", lang.hitch(this, function() {
+			domStyle.set(win.body(), {overflowY : "auto" });
+		}));
+		aspect.after(this.dialog, "hide", lang.hitch(this, function() {
+			domConstruct.destroy(this.submit);
+			this.submit = this.cloneSubmit;
+			domConstruct.place(this.submit, this.cancel, "after");
+		}));
+	}, addMessage : function (warningObject){
+		var locale = dojoConfig.locale;
+		var heading = query("h3.title.t38l",this.content)[0];
+		if(heading){
+			heading.innerHTML = warningObject.heading[locale];
+		}else{
+			heading = domConstruct.toDom('<h3 class="title t38l">'+ warningObject.heading[locale] +'</h3>');
+			domConstruct.place(heading, this.content,"first");
+		}
+		this.message.innerHTML = warningObject.detail[locale];
+	} });
+});

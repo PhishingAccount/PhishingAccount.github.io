@@ -1,0 +1,621 @@
+.countrySelector {
+    position: relative;
+    bottom: 12px;
+    height: 32px;
+    padding-top: 13px;
+    text-align: left;
+    width: auto;
+    display: inline-block;
+}
+
+.countrySelector .dijitMenuPopup {
+    background: #515358;
+    min-width: 192px;
+    /* left : auto !important;
+    right: 0 !important; */
+    /* required if the suggested solution is accepted */
+}
+
+.countrySelector table tr:nth-child(2n) {
+    background-color: #515358;
+}
+
+.countrySelector a {
+    color: #fff;
+    float: left;
+    height: 40px;
+    line-height: 40px;
+    width: 100%;
+}
+
+.countrySelector .dijitPopup .dijitMenuTable tr td {
+    height: 40px;
+    float: left;
+    width: 100%;
+    border: none;
+}
+
+.countrySelector .global-icon {
+    font-size: 2em;
+    margin: -8px 5px 0 5px;
+}
+
+li.countrySelector {
+    background-color: none;
+    bottom: 12px;
+    height: 27px;
+    position: relative;
+    padding-top: 13px;
+    text-align: left;
+    width: auto;
+    display: inline-block;
+}
+
+.countrySelectorOpen {
+    background-color: #515358;
+}
+
+.countrySelector .dijitPopup .dijitMenu {
+    border: 0 none;
+}
+
+.countrySelector .flag-16 {
+    margin: 2px 13px 0;
+}
+
+.countrySelector .countryFlag {
+    float: left;
+}
+
+.countrySelector .countryName {
+    float: left;
+}
+
+.countrySelector .dijitPopup table {
+    width: 100%;
+}
+
+.countrySelector .dijitPopup .dijitMenuTable .dijitMenuItemHover a, .countrySelector .dijitPopup .dijitMenuTable .dijitMenuItemFocused a {
+    text-decoration: none !important;
+    color: #fff !important;
+    background-color: #000 !important;
+}
+
+.countrySelector .dijitPopup .dijitMenuTable .dijitMenuItemHover a span.icon-agree, .countrySelector .dijitPopup .dijitMenuTable .dijitMenuItemFocused a span.icon-agree {
+    color: #fff;
+    text-decoration: none;
+}
+
+.countrySelector span.icon-agree {
+    font-size: 1.5em;
+    color: #000;
+    margin: 9px 13px 0 0;
+    float: right;
+}
+
+.countrySelector .dijitPopup .dijitMenuTable tr.dijitMenuItemFocused td {
+    border: none !important;
+}
+
+.countrySelector .dijitDropDownButtonFocused .dijitReset.dijitStretch.dijitButtonContents.dijitDownArrowButton.span-modify {
+    border: 1px dotted #999;
+}
+
+.countrySelector .span-modify {
+    display: block;
+    height: 82%;
+    width: auto;
+}
+
+.countrySelector .not-selectedMenuItem {
+    color: #fff;
+    background-color: #515358;
+}
+
+.countrySelector .selectedMenuItem {
+    color: #000;
+    float: left;
+    height: 40px;
+    line-height: 40px;
+    width: 100%;
+}
+
+.countrySelector .selectedMenuItem:hover {
+    background: none repeat scroll 0 0 #000;
+    color: #fff;
+    float: left;
+    height: 40px;
+    line-height: 40px;
+}
+
+.countrySelector .countryName:focus {
+    outline: 1px dotted #ff0;
+    outline-offset: 1px dotted #ff0;
+}
+
+.countrySelector .dijitPopup .dijitMenuTable tr td {
+    background: none repeat scroll 0 0 rgba(0, 0, 0, 0) !important;
+}
+
+.countrySelector .dijitPopup .dijitMenuTable tr.xyzActive, .countrySelector .dijitPopup .dijitMenuTable tr.span.xyzActive {
+    background: none repeat scroll 0 0 #d2d2d2;
+    color: #000;
+    float: left;
+    height: 40px;
+    line-height: 40px;
+    width: 100%;
+}
+
+.countrySelector tr.dijitMenuItem:hover {
+    background: #000;
+    color: #fff;
+    float: left;
+    height: 40px;
+    line-height: 40px;
+    width: 100%;
+}
+
+.countrySelector .dijitPopup {
+    border: none;
+}
+
+.emptyspan {
+    width: 21px;
+}
+
+.country-selctor-div {
+    padding: 10px;
+}
+
+.rightheadtextlinks span.icon-chevron-down {
+    float: left;
+    font-size: 1.7em/* 20px */;
+    margin-left: 8px;
+    margin-top: -4px;
+    vertical-align: text-top;
+}
+
+@media only screen and (min-width: 60.063em) {
+    .utility-bar-container .countrySelector a.countryMain,
+    .utility-bar-container .countrySelector div.countryMain {
+        height: 23px;
+        line-height: 20px;
+        padding-top: 7px;
+    }
+    
+    .utility-bar-container .countrySelector .flag-link { line-height: 10px; }
+
+    .countrySelectorOpen {
+        background-color: #515358;
+    }
+
+    .actus.base .countrySelector a.countryMain:focus, .actus.base .countrySelector a.countryMain:hover {
+        text-decoration: none;
+        outline: 1px dotted;
+    }
+
+    .actus.base .countrySelector a.countryMain:focus span, .actus.base .countrySelector a.countryMain:hover span {
+        text-decoration: none;
+    }
+
+    .countrySelector .countryMenu {
+        position: absolute;
+        top: 45px;
+        background-color: #515358;
+        min-width: 250px;
+        display: none;
+    }
+
+    .countrySelector .countryMenu li.countryMenuItem {
+        display: block;
+        clear: both;
+        width: 100%;
+    }
+
+    .countrySelector .countryMenu .selectedMenuItem {
+        color: #fff;
+        background-color: #000;
+    }
+
+    .countrySelector .countryMenu .selectedMenuItem:hover, .countrySelector .countryMenu .not-selectedMenuItem:hover,
+    .countrySelector .countryMenu .selectedMenuItem:focus, .countrySelector .countryMenu .not-selectedMenuItem:focus {
+        text-decoration: none;
+    }
+    
+    .countrySelector .countryMenu .selectedMenuItem:hover span, .countrySelector .countryMenu .not-selectedMenuItem:hover span,
+    .countrySelector .countryMenu .selectedMenuItem:focus span, .countrySelector .countryMenu .not-selectedMenuItem:focus span{
+        text-decoration: underline;
+    }
+
+    .countryMenu .countryMenuItem .selectedMenuItem:after {
+        content: "\f00a";
+        display: inline-block;
+        speak: none;
+        font-family: hsbcicons_regular;
+        float: right;
+        font-size: 1.5em;
+        margin-right: 13px;
+    }
+
+    .countrySelector .countryMain .country {
+        float: left;
+        line-height: 0.9;
+    }
+
+    .countryMenu .countryMenuItem .country,
+    .countrySelector .countryMain .country {
+        text-indent: 30px;
+        width: auto;
+    }
+    
+    .countryMenu .countryMenuItem .country span{
+    	line-height: 0;
+    }
+
+    .countryMenu .countryMenuItem .country {
+        line-height: 0.9;
+    }
+
+    .utility-bar-container .countrySelector .country.flag-16 {
+        margin: 0px 0 0 13px;
+    }
+
+    .utility-bar-container .countrySelector .countryMain .country.flag-16 {
+        margin: 2px 4px 0 13px;
+    }
+
+    /* .countryMenu .countryMenuItem .selectedMenuItem:before,
+    .countryMenu .countryMenuItem .not-selectedMenuItem:before {
+        margin: 2px 13px 0;
+        display: inline-block;
+        height: 11px;
+        text-indent: -9999px;
+        width: 14px;
+    } */
+    /* .actus .flag-16.flag-GB {
+        background-position: 0 -341px;
+    } */
+    .countrySelector .countryMenu .selectedMenuItem:hover span.icon-agree,
+    .countrySelector .countryMenu .selectedMenuItem:focus span.icon-agree {
+        color: #fff;
+        text-decoration: none;
+    }
+}
+
+@media ( min-width: 32.563em) and (max-width: 60em) {
+    .country-selector-div {
+        clear: both;
+        padding-left: 10px;
+    }
+
+    .flag-24 {
+        margin-right: 10px;
+    }
+
+    .rightheadtextlinks .icon-agree {
+        float: right;
+        font-size: 1.5em;
+        margin-right: -5px;
+        margin-top: -5px;
+    }
+
+    .country-selector-li {
+        background-color: #d2d2d2;
+        border-right: 1px solid #d2d2d2;
+        color: #fff;
+        content: ".";
+        display: block;
+        height: 35px;
+        position: absolute;
+        right: 0;
+        text-indent: -9999px;
+        top: 22px;
+    }
+
+    span.global-icon {
+        font-size: 1.5em;
+        margin: -5px 7px 0 -7px;
+    }
+
+    a.cselect:hover span.global-icon, a.cselect:focus span.global-icon {
+        text-decoration: none !important;
+    }
+
+    div.doormatmenu a.not-selectedMenuItem {
+        background-color: #d4d4d4 !important;
+        color: #333;
+    }
+
+    div.doormatmenu a span.country {
+        padding-left: 32px;
+	    text-indent: 0;
+	    width: auto;
+    }
+
+    li.countryMenuItem {
+        padding: 0;
+    }
+
+    a.cselect span.icon-left-tab {
+        margin-left: -3px;
+        margin-top: 2px;
+    }
+    
+    span.cselect span.icon-left-tab {
+        margin-left: 17px;
+        margin-top: 2px;
+    }
+
+    a.cselect span.headtext {
+        padding: 3px 0 1px 36px !important;
+    }
+
+	.countryMenuItem a:focus{
+		text-decoration: underline;
+	}
+
+    .countryMenuItem .selectedMenuItem > span:after {
+        content: "\f00a";
+        display: inline-block;
+        speak: none;
+        font-family: hsbcicons_regular;
+        font-size: 1.5em;
+        margin-top: -5px;
+        padding-left: 5px;
+    }
+    a.cselect + div.doormatmenu{
+    	background-color: #404040 !important;
+    	color: #fff !important;
+    }
+    
+    div.doormatmenu ul li.countryMenuItem a.not-selectedMenuItem { background: none !important; }
+    div.doormatmenu ul li.countryMenuItem a.selectedMenuItem { background: #000 !important; }
+
+	div.doormatmenu ul li.countryMenuItem a.not-selectedMenuItem,
+	div.doormatmenu ul li.countryMenuItem a.selectedMenuItem {
+		color: #CCCCCC;
+    	padding: 10px;
+    	font-size: .875em;
+    	display: block;
+	}
+	
+	a.cselect + div.doormatmenu p.doormat-head{
+		border-bottom: 1px solid #4e4e4e;
+	}	
+}
+
+@media ( min-width: 0) and (max-width: 32.5em) {
+    .country-selector-div {
+        clear: both;
+        padding-left: 10px;
+    }
+
+    .flag-24 {
+        margin-right: 10px;
+    }
+
+    .rightheadtextlinks .icon-agree {
+        float: right;
+        font-size: 1.5em;
+        margin-right: -5px;
+        margin-top: -5px;
+    }
+
+    .country-selector-li {
+        background-color: #d2d2d2;
+        border-right: 1px solid #d2d2d2;
+        color: #fff;
+        content: ".";
+        display: block;
+        height: 35px;
+        position: absolute;
+        right: 0;
+        text-indent: -9999px;
+        top: 22px;
+    }
+
+    span.global-icon {
+        font-size: 1.5em;
+        margin: -5px 2px 0 -10px;
+    }
+
+    a.cselect:hover span.global-icon, a.cselect:focus span.global-icon {
+        text-decoration: none !important;
+    }
+
+    div.doormatmenu a.not-selectedMenuItem {
+        background-color: #d4d4d4 !important;
+        color: #333;
+    }
+
+    div.doormatmenu a span.country {
+        padding-left: 32px;
+	    text-indent: 0;
+	    width: auto;
+    }
+
+    li.countryMenuItem {
+        padding: 0;
+    }
+
+    a.cselect span.icon-left-tab,
+    span.cselect span.icon-left-tab {
+        margin-left: -5px;
+        margin-top: 7px;
+    }
+
+    a.cselect span.headtext {
+        padding: 8px 0 1px 31px !important;
+    }
+    
+    span.hong-kong-static span.headtext {
+    	display: inline-block;
+    	padding: 8px 5px 0 !important;
+    }
+	
+	.countryMenuItem a:focus{
+		text-decoration: underline;
+	}
+	
+    .countryMenuItem .selectedMenuItem > span:after {
+        content: "\f00a";
+        display: inline-block;
+        speak: none;
+        font-family: hsbcicons_regular;        
+        font-size: 1.5em;
+        margin-top: -25px;
+        padding-left: 5px;
+    }
+    
+    a.cselect + div.doormatmenu{
+    	background-color: #404040 !important;
+    	color: #fff !important;
+    }
+    
+    div.doormatmenu ul li.countryMenuItem a.not-selectedMenuItem { background: none !important; }
+    div.doormatmenu ul li.countryMenuItem a.selectedMenuItem { background: #000 !important; }
+
+	div.doormatmenu ul li.countryMenuItem a.not-selectedMenuItem,
+	div.doormatmenu ul li.countryMenuItem a.selectedMenuItem {
+		color: #CCCCCC;
+    	padding: 10px 10px 10px 15px;
+    	font-size: .875em;
+    	display: block;
+	}
+	a.cselect +  div.doormatmenu p.doormat-head{
+		border-bottom: 1px solid #4e4e4e;
+	}
+}
+
+/********************************* IE7/IE8 styles *********************************/
+.dj_ie7 .utility-bar-container .countrySelector a.countryMain,
+.dj_ie8 .utility-bar-container .countrySelector a.countryMain,
+.dj_ie7 .utility-bar-container .countrySelector div.countryMain,
+.dj_ie8 .utility-bar-container .countrySelector div.countryMain {
+    height: 23px;
+    line-height: 20px;
+    padding-top: 7px;
+}
+
+.dj_ie7 .countrySelectorOpen,
+.dj_ie8 .countrySelectorOpen {
+    background-color: #515358;
+}
+
+.dj_ie7 .actus.base .countrySelector a.countryMain:focus,
+.dj_ie8 .actus.base .countrySelector a.countryMain:focus,
+.dj_ie7 .actus.base .countrySelector a.countryMain:hover,
+.dj_ie8 .actus.base .countrySelector a.countryMain:hover {
+    text-decoration: none;
+    outline: 1px dotted;
+}
+
+.dj_ie7 .actus.base .countrySelector a.countryMain:focus span,
+.dj_ie8 .actus.base .countrySelector a.countryMain:focus span,
+.dj_ie7 .actus.base .countrySelector a.countryMain:hover span,
+.dj_ie8 .actus.base .countrySelector a.countryMain:hover span {
+    text-decoration: none;
+}
+
+.dj_ie7 .countrySelector .countryMenu,
+.dj_ie8 .countrySelector .countryMenu {
+    position: absolute;
+    top: 45px;
+    left: 0;
+    background-color: #515358;
+    min-width: 250px;
+    display: none;
+}
+
+.dj_ie7 .countrySelector .countryMenu li.countryMenuItem,
+.dj_ie8 .countrySelector .countryMenu li.countryMenuItem {
+    display: block;
+    clear: both;
+    width: 100%;
+    float: none;
+}
+
+.dj_ie7 .countrySelector .countryMenu .selectedMenuItem,
+.dj_ie8 .countrySelector .countryMenu .selectedMenuItem {
+    color: #fff;
+    background-color: #000;
+}
+
+.dj_ie7 .countrySelector .countryMenu li.countryMenuItem a span,
+.dj_ie8 .countrySelector .countryMenu li.countryMenuItem a span {
+    text-decoration: none;
+}
+
+.dj_ie7 .countrySelector .countryMenu .selectedMenuItem:hover,
+.dj_ie8 .countrySelector .countryMenu .selectedMenuItem:hover,
+.dj_ie7 .countrySelector .countryMenu .not-selectedMenuItem:hover,
+.dj_ie8 .countrySelector .countryMenu .not-selectedMenuItem:hover,
+.dj_ie7 .countrySelector .countryMenu .selectedMenuItem:focus,
+.dj_ie8 .countrySelector .countryMenu .selectedMenuItem:focus,
+.dj_ie7 .countrySelector .countryMenu .not-selectedMenuItem:focus,
+.dj_ie8 .countrySelector .countryMenu .not-selectedMenuItem:focus {
+    color: #fff;
+}
+
+.dj_ie7 .countryMenu .countryMenuItem .selectedMenuItem {
+    background-image: url(/clientapp/hdx/images/icons/icon-selectedmenu-tick.png);
+    background-position: right center;
+    background-repeat: no-repeat;
+}
+.dj_ie7 .countryMenu .countryMenuItem .selectedMenuItem:hover {
+    background-image: url(/clientapp/hdx/images/icons/icon-selectedmenu-tick.png);
+    background-position: right center;
+    background-repeat: no-repeat;
+}
+
+.dj_ie8 .countryMenu .countryMenuItem .selectedMenuItem:after {
+    content: "\f00a";
+    display: inline-block;
+    speak: none;
+    font-family: hsbcicons_regular;
+    float: right;
+    font-size: 1.5em;
+    margin-right: 13px;
+}
+
+.dj_ie7 .countrySelector .countryMain .country,
+.dj_ie8 .countrySelector .countryMain .country {
+    float: left;
+    line-height: 0.9;
+}
+
+.dj_ie7 .countryMenu .countryMenuItem .country,
+.dj_ie8 .countryMenu .countryMenuItem .country,
+.dj_ie7 .countrySelector .countryMain .country,
+.dj_ie8 .countrySelector .countryMain .country {
+    text-indent: 30px;
+    width: auto;
+}
+
+.dj_ie7 .countryMenu .countryMenuItem .country,
+.dj_ie8 .countryMenu .countryMenuItem .country {
+    line-height: 0.8;
+}
+
+.dj_ie7 .utility-bar-container .countrySelector .country.flag-16,
+.dj_ie8 .utility-bar-container .countrySelector .country.flag-16 {
+    margin: 0px 0 0 13px;
+}
+.dj_ie7 .utility-bar-container .countrySelector .country.flag-16 {
+    text-indent: 0;
+    padding-left: 30px;
+}
+
+.dj_ie7 .utility-bar-container .countrySelector .countryMain .country.flag-16,
+.dj_ie8 .utility-bar-container .countrySelector .countryMain .country.flag-16 {
+    margin: 2px 0 0 13px;
+}
+.dj_ie8 .countryMenu .countryMenuItem a:hover .country span,
+.dj_ie8 .countryMenu .countryMenuItem a:focus .country span{
+	text-decoration: underline;
+}
+
+.dj_ie7 .countryMenu .countryMenuItem:focus a .country span,
+.dj_ie7 .countryMenu .countryMenuItem:hover a .country span{
+	text-decoration: underline;
+}

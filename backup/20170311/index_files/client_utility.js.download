@@ -1,0 +1,168 @@
+var cookie_setting = {
+	domain: (typeof globalConfig != "undefined") ? (( globalConfig.cookieDomain || globalConfig.cookieDomain == "") ? globalConfig.cookieDomain : ".hsbc.com.hk") : ".hsbc.com.hk" ,
+	path : '/',
+	expires : 365
+};
+/**
+ * Set the countryCode to cookie.
+ * @param countryCode
+ */
+function setCountryCode(countryCode) {
+	countryCode = countryCode || '';
+	var cookieValue = getCookie('HSBC_CLIENT_COOKIE');
+	if(!cookieValue){
+		cookieValue = 'CountryCode=' + countryCode;
+	}else if(cookieValue.indexOf('CountryCode=') > -1){
+		cookieValue = cookieValue.replace(/^(.*,)?CountryCode=[^,]*(,.*)?$/, '$1'+'CountryCode='+countryCode+'$2');
+	}else{
+		cookieValue = cookieValue + ',CountryCode=' + countryCode;
+	}
+	setCookie('HSBC_CLIENT_COOKIE', cookieValue, cookie_setting);
+}
+/**
+ * Set the groupMember to cookie.
+ * @param groupMember
+ */
+function setGroupMember(groupMember) {
+	groupMember = groupMember || '';
+	var cookieValue = getCookie('HSBC_CLIENT_COOKIE');
+	if(!cookieValue){
+		cookieValue = 'GroupMember=' + groupMember;
+	}else if(cookieValue.indexOf('GroupMember=') > -1){
+		cookieValue = cookieValue.replace(/^(.*,)?GroupMember=[^,]*(,.*)?$/, '$1'+'GroupMember='+groupMember+'$2');
+	}else{
+		cookieValue = cookieValue + ',GroupMember=' + groupMember;
+	}
+	setCookie('HSBC_CLIENT_COOKIE', cookieValue, cookie_setting);
+}
+/**
+ * Set the branding to cookie.
+ * @param branding
+ */
+function setBranding(branding) {
+	var brandingStr = '';
+	if (branding) {
+		if (branding.join) {
+			brandingStr = branding.join('|');
+		} else {
+			brandingStr = branding;
+		}
+	}
+	var cookieValue = getCookie('HSBC_CLIENT_COOKIE');
+	if(!cookieValue){
+		cookieValue = 'Branding=' + brandingStr;
+	}else if(cookieValue.indexOf('Branding=') > -1){
+		cookieValue = cookieValue.replace(/^(.*,)?Branding=[^,]*(,.*)?$/, '$1'+'Branding='+brandingStr+'$2');
+	}else{
+		cookieValue = cookieValue + ',Branding=' + brandingStr;
+	}
+	setCookie('HSBC_CLIENT_COOKIE', cookieValue, cookie_setting);
+}
+/**
+ * Set the locale to cookie.
+ * @param locale
+ */
+function setLocale(locale) {
+	locale = locale || '';
+	var cookieValue = getCookie('HSBC_CLIENT_COOKIE');
+	if(!cookieValue){
+		cookieValue = 'PreferredLocale=' + locale;
+	}else if(cookieValue.indexOf('PreferredLocale=') > -1){
+		cookieValue = cookieValue.replace(/^(.*,)?PreferredLocale=[^,]*(,.*)?$/, '$1'+'PreferredLocale='+locale+'$2');
+	}else{
+		cookieValue = cookieValue + ',PreferredLocale=' + locale;
+	}
+	setCookie('HSBC_CLIENT_COOKIE', cookieValue, cookie_setting);
+}
+/**
+ * Get the countryCode from cookie.
+ * @returns {String}
+ */
+function getCountryCode(){
+	var cookieValue = getCookie('HSBC_CLIENT_COOKIE');
+	if(!cookieValue){
+		return null;
+	}else if(cookieValue.indexOf('CountryCode=') > -1){
+		return cookieValue.replace(/^(.*,)?CountryCode=([^,]*)(,.*)?$/, '$2');
+	}else{
+		return null;
+	}
+}
+/**
+ * Get the groupMember from cookie.
+ * @returns {String}
+ */
+function getGroupMember(){
+	var cookieValue = getCookie('HSBC_CLIENT_COOKIE');
+	if(!cookieValue){
+		return null;
+	}else if(cookieValue.indexOf('GroupMember=') > -1){
+		return cookieValue.replace(/^(.*,)?GroupMember=([^,]*)(,.*)?$/, '$2');
+	}else{
+		return null;
+	}
+}
+/**
+ * Get the branding from cookie.
+ * @returns {String[]}
+ */
+function getBranding(){
+	var cookieValue = getCookie('HSBC_CLIENT_COOKIE');
+	if(!cookieValue){
+		return null;
+	}else if(cookieValue.indexOf('Branding=') > -1){
+		var branding = cookieValue.replace(/^(.*,)?Branding=([^,]*)(,.*)?$/, '$2');
+		return branding.split('|');
+	}else{
+		return null;
+	}
+}
+/**
+ * Get the locale from cookie.
+ * @returns {String}
+ */
+function getLocale(){
+	var cookieValue = getCookie('HSBC_CLIENT_COOKIE');
+	if(!cookieValue){
+		return null;
+	}else if(cookieValue.indexOf('PreferredLocale=') > -1){
+		return cookieValue.replace(/^(.*,)?PreferredLocale=([^,]*)(,.*)?$/, '$2');
+	}else{
+		return null;
+	}
+}
+/**
+ * Set the cookie value.
+ * @param name
+ * @param value
+ * @param props
+ */
+function setCookie(name, value, props) {
+	props = props || {};
+	var exp = props.expires;
+	if(typeof exp == "number"){
+		var d = new Date();
+		d.setTime(d.getTime() + exp*24*60*60*1000);
+		exp = props.expires = d;
+	}
+	if(exp && exp.toUTCString){ props.expires = exp.toUTCString(); }
+	value = encodeURIComponent(value);
+	var updatedCookie = name + "=" + value, propName;
+	for(propName in props){
+		updatedCookie += "; " + propName;
+		var propValue = props[propName];
+		if(propValue !== true){ updatedCookie += "=" + propValue; }
+	}
+	document.cookie = updatedCookie;
+}
+/**
+ * Get the cookie value.
+ * @param name
+ * @returns {String} attribute value
+ */
+function getCookie(name) {
+	var c = document.cookie, ret;
+	var matches = c.match(new RegExp("(?:^|; )" + name + "=([^;]*)"));
+	ret = matches ? decodeURIComponent(matches[1]) : undefined;
+	return ret;
+}

@@ -1,0 +1,6 @@
+define({  
+		externalOverlayCloseHiddenText : "Close",
+        externalOverlayUnderstandBtn : "I understand, let's proceed",
+        externalOverlayNewWindow : "Opens in a new Window.",
+        externalOverlayCancelBtn :"Cancel"
+   });
