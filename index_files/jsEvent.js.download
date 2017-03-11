@@ -1,1 +1,1 @@
-var HSBCHKtargetElement = document.getElementById('HSBCHKScriptElement');if(HSBCHKtargetElement)HSBCHKtargetElement.responseReceived = true;
+if(window.HSBCHKRTEHandler){try{window.HSBCHKRTEHandler.handleResponse([]);}catch(e){}}var HSBCHKtargetElement = document.getElementById('HSBCHKScriptElement');if(HSBCHKtargetElement)HSBCHKtargetElement.responseReceived = true;
