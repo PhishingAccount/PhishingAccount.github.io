@@ -1,15 +1,66 @@
-function pws_popupNewBrowser(url,status,location,scroll,mbar,toolbar,resize,width,height,winname){!winname?winname='nb':winname=winname;nb=window.open(url,winname,'status='+status+',location='+location+',scrollbars='+scroll+',menubar='+mbar+',toolbar='+toolbar+',resizable='+resize+',height='+height+',width='+width+',left=0,top=0');nb.focus();}
-function pws_register_en(){pws_popupNewBrowser('https://www.ebanking.hsbc.com.hk/1/2/P2GLandingPage?forReg=Y&LANGTAG=en&COUNTRYTAG=US','yes','no','yes','no','no','yes',screen.width,screen.height*0.88,'pibwin');}
-function pws_register_zh(){pws_popupNewBrowser('https://www.ebanking.hsbc.com.hk/1/2/P2GLandingPage?forReg=Y&LANGTAG=zh&COUNTRYTAG=HK','yes','no','yes','no','no','yes',screen.width,screen.height*0.88,'pibwin');}
-function pws_register_zh_CN(){pws_popupNewBrowser('https://www.ebanking.hsbc.com.hk/1/2/P2GLandingPage?forReg=Y&LANGTAG=zh&COUNTRYTAG=','yes','no','yes','no','no','yes',screen.width,screen.height*0.88,'pibwin');}
-function pws_logon_en(){pws_popupNewBrowser('https://www.ebanking.hsbc.com.hk/1/2/logon?LANGTAG=en&COUNTRYTAG=US','yes','no','yes','no','no','yes',screen.width,screen.height*0.88,'pibwin');}
-function pws_logon_zh(){pws_popupNewBrowser('https://www.ebanking.hsbc.com.hk/1/2/logon?LANGTAG=zh&COUNTRYTAG=HK','yes','no','yes','no','no','yes',screen.width,screen.height*0.88,'pibwin');}
-function pws_logon_zh_CN(){pws_popupNewBrowser('https://www.ebanking.hsbc.com.hk/1/2/logon?LANGTAG=zh&COUNTRYTAG=','yes','no','yes','no','no','yes',screen.width,screen.height*0.88,'pibwin');}
-function pws_digitalOrder_en(formname,cookievalue,wtid){pws_popupNewBrowser('','yes','no','yes','no','no','yes',screen.width,screen.height*0.88);pws_setCookie('FromWebSite',cookievalue,'/','.hsbc.com.hk','true',0);var tarlink='https://www.ebanking.hsbc.com.hk/1/2/logon?LANGTAG=en&COUNTRYTAG=US';document.forms[formname].action=tarlink;document.forms[formname].submit();}
-function pws_digitalOrder_zh(formname,cookievalue,wtid){pws_popupNewBrowser('','yes','no','yes','no','no','yes',screen.width,screen.height*0.88);pws_setCookie('FromWebSite',cookievalue,'/','.hsbc.com.hk','true',0);var tarlink='https://www.ebanking.hsbc.com.hk/1/2/logon?LANGTAG=zh&COUNTRYTAG=HK';document.forms[formname].action=tarlink;document.forms[formname].submit();}
-function pws_digitalOrder_zh_CN(formname,cookievalue,wtid){pws_popupNewBrowser('','yes','no','yes','no','no','yes',screen.width,screen.height*0.88);pws_setCookie('FromWebSite',cookievalue,'/','.hsbc.com.hk','true',0);var tarlink='https://www.ebanking.hsbc.com.hk/1/2/logon?LANGTAG=zh&COUNTRYTAG=';document.forms[formname].action=tarlink;document.forms[formname].submit();}
-function pws_setCookie(name,value,path,domain,secure,expires){document.cookie=name+'='+escape(value)+
-((path)?'; path='+path:'')+
-((domain)?'; domain='+domain:'')+
-((secure)?';secure':'')+
-((expires)?';expires='+expires.toGMTString():'');}
+//HK Local
+
+//new window
+function pws_popupNewBrowser(url, status, location, scroll, mbar, toolbar, resize, width, height, winname) {
+	!winname? winname='nb':winname=winname;
+	nb=window.open(url, winname, 'status=' + status + ',location=' + location + ',scrollbars=' + scroll + ',menubar=' + mbar + ',toolbar=' + toolbar + ',resizable=' + resize + ',height=' + height + ',width=' + width + ',left=0,top=0');
+	nb.focus();
+}
+
+// PIB register
+function pws_register_en() {
+	pws_popupNewBrowser('https://www.ebanking.hsbc.com.hk/1/2/P2GLandingPage?forReg=Y&LANGTAG=en&COUNTRYTAG=US', 'yes', 'no', 'yes', 'no', 'no', 'yes', screen.width, screen.height*0.88, 'pibwin');
+}
+function pws_register_zh() {
+	pws_popupNewBrowser('https://www.ebanking.hsbc.com.hk/1/2/P2GLandingPage?forReg=Y&LANGTAG=zh&COUNTRYTAG=HK', 'yes', 'no', 'yes', 'no', 'no', 'yes', screen.width, screen.height*0.88, 'pibwin');
+}
+function pws_register_zh_CN() {
+	pws_popupNewBrowser('https://www.ebanking.hsbc.com.hk/1/2/P2GLandingPage?forReg=Y&LANGTAG=zh&COUNTRYTAG=', 'yes', 'no', 'yes', 'no', 'no', 'yes', screen.width, screen.height*0.88, 'pibwin');
+}
+
+// PIB logn
+function pws_logon_en() {
+	pws_popupNewBrowser('https://www.ebanking.hsbc.com.hk/1/2/logon?LANGTAG=en&COUNTRYTAG=US', 'yes', 'no', 'yes', 'no', 'no', 'yes', screen.width, screen.height*0.88, 'pibwin');
+}
+function pws_logon_zh() {
+	pws_popupNewBrowser('https://www.ebanking.hsbc.com.hk/1/2/logon?LANGTAG=zh&COUNTRYTAG=HK', 'yes', 'no', 'yes', 'no', 'no', 'yes', screen.width, screen.height*0.88, 'pibwin');
+}
+function pws_logon_zh_CN() {
+	pws_popupNewBrowser('https://www.ebanking.hsbc.com.hk/1/2/logon?LANGTAG=zh&COUNTRYTAG=', 'yes', 'no', 'yes', 'no', 'no', 'yes', screen.width, screen.height*0.88, 'pibwin');
+}
+
+//Digital order EN
+function pws_digitalOrder_en(formname, cookievalue, wtid) {
+	pws_popupNewBrowser('', 'yes', 'no', 'yes', 'no', 'no', 'yes', screen.width, screen.height*0.88);
+	pws_setCookie('FromWebSite', cookievalue, '/', '.hsbc.com.hk', 'true', 0);
+	var tarlink = 'https://www.ebanking.hsbc.com.hk/1/2/logon?LANGTAG=en&COUNTRYTAG=US';
+	document.forms[formname].action = tarlink;
+	document.forms[formname].submit();	
+}
+
+//Digital order HK
+function pws_digitalOrder_zh(formname, cookievalue, wtid) {
+	pws_popupNewBrowser('', 'yes', 'no', 'yes', 'no', 'no', 'yes', screen.width, screen.height*0.88);
+	pws_setCookie('FromWebSite', cookievalue, '/', '.hsbc.com.hk', 'true', 0);
+	var tarlink = 'https://www.ebanking.hsbc.com.hk/1/2/logon?LANGTAG=zh&COUNTRYTAG=HK';
+ 	document.forms[formname].action = tarlink;
+	document.forms[formname].submit();
+}
+
+//Digital order ZH
+function pws_digitalOrder_zh_CN(formname, cookievalue, wtid) {
+	pws_popupNewBrowser('', 'yes', 'no', 'yes', 'no', 'no', 'yes', screen.width, screen.height*0.88);
+	pws_setCookie('FromWebSite', cookievalue, '/', '.hsbc.com.hk', 'true', 0);
+	var tarlink = 'https://www.ebanking.hsbc.com.hk/1/2/logon?LANGTAG=zh&COUNTRYTAG=';
+	document.forms[formname].action = tarlink;
+	document.forms[formname].submit();
+}
+
+//cookie to PIB
+function pws_setCookie(name, value, path, domain, secure, expires) {
+    document.cookie = name + '=' + escape(value) +
+    ((path) ? '; path=' + path : '') +
+    ((domain) ? '; domain=' + domain : '') +
+    ((secure) ? ';secure' : '')+
+    ((expires) ? ';expires=' + expires.toGMTString() : '') ;
+}
